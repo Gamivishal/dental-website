@@ -43,9 +43,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
   const menuItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
+    { id: 'patient-info', label: 'Patient Info' },
     { id: 'treatments', label: 'Treatments', hasSub: true },
     { id: 'gallery', label: 'Smile Gallery' },
-    { id: 'patient-info', label: 'Patient Info' },
     { id: 'testimonials', label: 'Testimonials' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -100,8 +100,8 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
           <button className="cta-button primary-cta" onClick={() => handleNav('enquiry')}>
             Book Appointment
           </button>
-          <a href="tel:+18005550199" className="cta-icon-link phone-call" title="Call Us">
-            📞 <span className="cta-label">+1 800 555 0199</span>
+          <a href="tel:9835333333" className="cta-icon-link phone-call" title="Call Us">
+            📞 <span className="cta-label">9835333333</span>
           </a>
           <a
             href="https://wa.me/919510212154"
@@ -163,8 +163,8 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
               >
                 Book Appointment
               </button>
-              <a href="tel:+18005550199" className="mobile-cta-link">
-                📞 Call: +1 800 555 0199
+              <a href="tel:9835333333" className="mobile-cta-link">
+                📞 Call: 9835333333
               </a>
               <a
                 href="https://wa.me/919510212154"

@@ -18,15 +18,58 @@ import { Enquiry } from './pages/Enquiry';
 import './App.css';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<string>('home');
+  const getInitialPage = (): string => {
+    const hash = window.location.hash.replace('#/', '');
+    const validPages = ['home', 'about', 'treatments', 'treatment-detail', 'gallery', 'patient-info', 'testimonials', 'contact', 'enquiry'];
+    return validPages.includes(hash) ? hash : 'home';
+  };
+
+  const [currentPage, _setCurrentPage] = useState<string>(getInitialPage);
   const [selectedCategory, setSelectedCategory] = useState<string>('general');
   const [selectedSubcategory, setSelectedSubcategory] = useState<TreatmentSub | null>(null);
   const [cookieConsent, setCookieConsent] = useState<boolean>(false);
 
-  // Sync scroll on page changes
+  const setCurrentPage = (page: string) => {
+    window.location.hash = `#/${page}`;
+    _setCurrentPage(page);
+  };
+
+  // Sync scroll and hash on page changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [currentPage]);
+
+  // Global scroll listener for parallax effects
+  useEffect(() => {
+    const handleScroll = () => {
+      document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Sync state with URL hash updates (e.g. browser navigation, page reload)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#/', '');
+      const validPages = ['home', 'about', 'treatments', 'treatment-detail', 'gallery', 'patient-info', 'testimonials', 'contact', 'enquiry'];
+      if (validPages.includes(hash)) {
+        _setCurrentPage(hash);
+      } else {
+        _setCurrentPage('home');
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Set default hash if not present
+    if (!window.location.hash) {
+      window.location.hash = '#/home';
+    }
+
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Read cookie preference from localStorage
   useEffect(() => {
@@ -89,14 +132,18 @@ function App() {
       />
 
       {/* Render Dynamic Routing Area */}
-      <main className="page-content-wrapper">
+      <main className="page-content-wrapper" style={{ position: 'relative', overflow: 'hidden' }}>
+        {/* Floating cinematic background shapes */}
+        <div className="floating-shape shape-1"></div>
+        <div className="floating-shape shape-2"></div>
+        <div className="floating-shape shape-3"></div>
         {renderPage()}
       </main>
 
       {/* Main Footer */}
-      <Footer 
-        setCurrentPage={setCurrentPage} 
-        setSelectedCategory={setSelectedCategory} 
+      <Footer
+        setCurrentPage={setCurrentPage}
+        setSelectedCategory={setSelectedCategory}
       />
 
       {/* Floating CTAs Widget */}
@@ -111,6 +158,69 @@ function App() {
           <button className="cta-button primary-cta" onClick={acceptCookies}>
             Accept & Proceed
           </button>
+        </div>
+      )}
+
+      {/* Procedure Details Popup Modal (Root Viewport Overlay) */}
+      {selectedSubcategory && (
+        <div className="treatment-modal-overlay" onClick={() => setSelectedSubcategory(null)}>
+          <div className="treatment-modal-card glass-card" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={() => setSelectedSubcategory(null)} aria-label="Close modal">
+              ✕
+            </button>
+            <div className="modal-header">
+              <span className="modal-tag">PROCEDURE DETAILS</span>
+              <h2>{selectedSubcategory.name}</h2>
+            </div>
+            <div className="modal-body">
+              <p className="modal-desc">{selectedSubcategory.desc}</p>
+              
+              <div className="modal-section-grid">
+                <div className="modal-info-block">
+                  <h4>💡 Common Symptoms</h4>
+                  <ul>
+                    {selectedSubcategory.symptoms.map((s, i) => (
+                      <li key={i}>{s}</li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="modal-info-block">
+                  <h4>✨ Treatment Benefits</h4>
+                  <ul>
+                    {selectedSubcategory.benefits.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="modal-meta-box">
+                <div className="meta-item">
+                  <strong>⏱️ Expected Duration</strong>
+                  <span>{selectedSubcategory.duration}</span>
+                </div>
+                <div className="meta-item">
+                  <strong>🏥 Recovery Time</strong>
+                  <span>{selectedSubcategory.recovery}</span>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button 
+                className="cta-button primary" 
+                onClick={() => {
+                  setSelectedSubcategory(null);
+                  setCurrentPage('enquiry');
+                }}
+              >
+                Book Appointment
+              </button>
+              <button className="cta-button outline" onClick={() => setSelectedSubcategory(null)}>
+                Close
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>

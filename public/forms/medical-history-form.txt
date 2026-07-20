@@ -1,0 +1,15 @@
+Oceanview Dental Clinic
+Medical History Form
+
+Patient Name:
+Date of Birth:
+Have you had any major illnesses or surgeries?
+Do you have any allergies?
+Do you take blood thinners or other medications?
+Do you have diabetes, hypertension, or heart disease?
+Are you pregnant or breastfeeding?
+Do you experience dental anxiety?
+Any other health information we should know?
+
+Signature:
+Date:

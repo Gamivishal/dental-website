@@ -1,21 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
 :root {
-  /* Premium Light Theme Core Palette */
-  --bg: #F7FBFD;
+  /* Premium Sage Green Brand Color Palette */
+  --bg: #F8FBFA;
   --bg-card: #FFFFFF;
   --bg-card-hover: #FFFFFF;
-  --bg-section: #EEF8FC;
-  --border: #E5E7EB;
-  --border-hover: #0099D8;
-  --text: #6B7280;
-  --text-h: #1F2937;
-  --accent: #0099D8;
-  --accent-hover: #00C4B3;
-  --accent-rgb: 0, 153, 216;
-  --shadow: 0 10px 30px rgba(0, 153, 216, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 20px 40px rgba(0, 153, 216, 0.08), 0 1px 10px rgba(0, 0, 0, 0.04);
+  --bg-section: #EDF5F4;
+  --border: #D8E5E3;
+  --border-hover: #4E6F6E;
+  --text: #6D7A79;
+  --text-h: #2E3B3A;
+  --accent: #4E6F6E;
+  --accent-hover: #3F5D5C;
+  --accent-secondary: #6F908D;
+  --accent-light: #A7C8C3;
+  --success: #6BAA75;
+  --white: #FFFFFF;
 
-  --sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --heading: 'Outfit', system-ui, -apple-system, sans-serif;
+  /* Header Specific Tokens */
+  --header-bg: #FFFFFF;
+  --header-text: #2F3D3C;
+  --header-accent: #496A69;
+  --header-accent-hover: #365554;
+  --header-border: #E8F0EF;
+
+  /* Footer Specific Tokens */
+  --footer-bg: #0d3538;
+  --footer-text: #DCE7E5;
+  --footer-text-h: #FFFFFF;
+  --footer-link: #FFFFFF;
+  --footer-link-hover: #BFD5D1;
+  --footer-social-bg: #5B7C7B;
+  --footer-social-hover-bg: #BFD5D1;
+  --footer-social-hover-text: #365554;
+  --footer-copyright-bg: #0d3538;
+
+  --accent-rgb: 78, 111, 110;
+  --accent-secondary-rgb: 111, 144, 141;
+  --accent-light-rgb: 167, 200, 195;
+
+  --shadow: 0 10px 30px rgba(78, 111, 110, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-hover: 0 20px 40px rgba(78, 111, 110, 0.08), 0 1px 10px rgba(0, 0, 0, 0.04);
+
+  --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --heading: 'Cormorant Garamond', Georgia, serif;
   --mono: ui-monospace, monospace;
 
   font: 17px/160% var(--sans);
@@ -44,7 +72,10 @@ body {
   box-sizing: border-box;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--heading);
   font-weight: 700;
   color: var(--text-h);
@@ -56,6 +87,7 @@ h1 {
   font-size: 56px;
   line-height: 110%;
   font-weight: 800;
+
   @media (max-width: 768px) {
     font-size: 38px;
   }
@@ -65,6 +97,7 @@ h2 {
   font-size: 38px;
   line-height: 120%;
   font-weight: 800;
+
   @media (max-width: 768px) {
     font-size: 28px;
   }
@@ -84,6 +117,7 @@ a {
   color: var(--accent);
   text-decoration: none;
   transition: color 0.3s ease;
+
   &:hover {
     color: var(--accent-hover);
   }
@@ -91,18 +125,61 @@ a {
 
 /* Glassmorphism/Premium Generic Card */
 .glass-card {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 32px;
   box-shadow: var(--shadow);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
+  overflow: hidden;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: var(--accent);
+    z-index: -1;
+    transition: height 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  h2,
+  h3,
+  h4,
+  p,
+  span,
+  strong,
+  div,
+  button {
+    transition: color 300ms ease, border-color 300ms ease;
+  }
 
   &:hover {
-    transform: translateY(-6px);
-    border-color: var(--border-hover);
+    transform: translateY(-10px);
+    border-color: var(--accent);
     box-shadow: var(--shadow-hover);
+
+    &::before {
+      height: 100%;
+    }
+
+    h2,
+    h3,
+    h4,
+    strong {
+      color: #ffffff !important;
+    }
+
+    p,
+    span,
+    div {
+      color: rgba(255, 255, 255, 0.9) !important;
+    }
   }
 }
 
@@ -123,22 +200,25 @@ a {
   letter-spacing: 0.2px;
 
   &.primary {
-    background: linear-gradient(135deg, var(--accent) 0%, #00b0ff 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
     color: #ffffff;
-    box-shadow: rgba(0, 153, 216, 0.2) 0 10px 20px -5px;
+    box-shadow: rgba(78, 111, 110, 0.15) 0 8px 16px -4px;
+
     &:hover {
-      background: linear-gradient(135deg, #00b0ff 0%, var(--accent) 100%);
-      transform: translateY(-2px);
-      box-shadow: rgba(0, 153, 216, 0.35) 0 12px 24px -5px;
+      background: var(--accent-hover);
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: rgba(63, 93, 92, 0.4) 0 12px 24px -5px;
     }
   }
 
   &.secondary {
-    background: var(--bg-section);
-    color: var(--text-h);
-    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+
     &:hover {
-      background: #e2f2fa;
+      background: var(--accent);
+      color: #ffffff;
       transform: translateY(-2px);
     }
   }
@@ -147,22 +227,23 @@ a {
     background: transparent;
     color: var(--accent);
     border: 2px solid var(--accent);
+
     &:hover {
-      background: rgba(0, 153, 216, 0.05);
-      color: var(--accent-hover);
-      border-color: var(--accent-hover);
+      background: var(--accent);
+      color: #ffffff;
       transform: translateY(-2px);
     }
   }
 
   &.primary-cta {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
     color: #ffffff;
-    box-shadow: rgba(0, 153, 216, 0.25) 0 10px 20px -5px;
+    box-shadow: rgba(78, 111, 110, 0.15) 0 8px 16px -4px;
+
     &:hover {
-      background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
-      transform: translateY(-2px);
-      box-shadow: rgba(0, 153, 216, 0.4) 0 12px 24px -5px;
+      background: var(--accent-hover);
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: rgba(63, 93, 92, 0.4) 0 12px 24px -5px;
     }
   }
 
@@ -181,6 +262,7 @@ a {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -219,9 +301,23 @@ a {
 }
 
 /* Utility alignments */
-.text-center { text-align: center; }
-.mt-4 { margin-top: 16px; }
-.mt-6 { margin-top: 24px; }
-.mt-8 { margin-top: 32px; }
-.py-10 { padding-top: 40px; padding-bottom: 40px; }
+.text-center {
+  text-align: center;
+}
 
+.mt-4 {
+  margin-top: 16px;
+}
+
+.mt-6 {
+  margin-top: 24px;
+}
+
+.mt-8 {
+  margin-top: 32px;
+}
+
+.py-10 {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}

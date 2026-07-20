@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export interface TreatmentSub {
   name: string;
@@ -98,19 +98,19 @@ export const treatmentData: TreatmentCategory[] = [
       },
       {
         name: 'Composite Bonding',
-        desc: 'Applying composite resin matching natural enamel to repair chips and minor gaps.',
-        symptoms: ['Chipped front tooth', 'Small gaps between front teeth'],
-        benefits: ['Single-visit solution', 'No tooth reduction', 'Cost-effective'],
+        desc: 'A conservative procedure using tooth-colored composite resin to repair chips, cracks, or gaps.',
+        symptoms: ['Chipped front tooth', 'Small gaps between teeth', 'Minor fractures'],
+        benefits: ['Done in a single visit', 'Highly conservative', 'Blends naturally with enamel'],
         duration: '30 - 60 minutes per tooth',
         recovery: 'None'
       },
       {
         name: 'Gum Contouring',
-        desc: 'Laser restructuring of the gumline to fix gummy smiles and achieve even contours.',
-        symptoms: ['Gummy smile', 'Uneven gum margins'],
-        benefits: ['Balanced smile proportion', 'Reveals natural tooth structure', 'Stitch-free laser recovery'],
-        duration: '1 session (30-60 mins)',
-        recovery: '24 - 48 hours'
+        desc: 'Aesthetic laser reshaping of uneven or low gum lines to resolve a "gummy smile".',
+        symptoms: ['Uneven gum line', 'Gummy smile', 'Teeth looking too short'],
+        benefits: ['Balanced gum margins', 'Elongates tooth appearance', 'Relatively quick recovery with laser care'],
+        duration: '30 - 45 minutes',
+        recovery: '1 - 2 days'
       }
     ]
   },
@@ -118,79 +118,79 @@ export const treatmentData: TreatmentCategory[] = [
     id: 'restorative',
     name: 'Restorative Dentistry',
     icon: '🦷',
-    summary: 'Reconstructive therapies replacing missing teeth structure to return complete chewing comfort.',
+    summary: 'Procedures built to reconstruct bite surfaces, repair cracks, and fill missing spaces.',
     subs: [
       {
         name: 'Dental Crowns',
-        desc: 'Custom-fit Zirconia or ceramic caps that fully cover and reinforce damaged teeth.',
-        symptoms: ['Weak teeth', 'Large cracked fillings', 'After a root canal treatment'],
-        benefits: ['Restores bite strength', 'Protects from fracturing', 'Natural aesthetic match'],
-        duration: '2 sessions (3-5 days)',
+        desc: 'Custom-fit protective caps restoring structural strength of heavily damaged or RCT treated teeth.',
+        symptoms: ['Cracked tooth crown', 'Post root canal tooth protection', 'Weak tooth support structure'],
+        benefits: ['Restores bite strength', 'Protects remaining natural tooth structure', 'Aesthetic tooth-like matching'],
+        duration: '2 sessions',
         recovery: 'None'
       },
       {
         name: 'Dental Bridges',
-        desc: 'Fixed restorations bridging gaps created by one or more missing adjacent teeth.',
-        symptoms: ['Single or multiple missing teeth', 'Difficulty chewing'],
-        benefits: ['Restores chewing efficiency', 'Prevents shifting of remaining teeth'],
+        desc: 'Fixed dental restorations filling spaces left by one or more missing adjacent teeth.',
+        symptoms: ['Single or multiple missing teeth', 'Difficulty chewing', 'Drifting adjacent teeth'],
+        benefits: ['Restores chewing and speech', 'Prevents shifts in bite alignment', 'No surgical implants needed'],
         duration: '2 sessions',
         recovery: 'None'
       },
       {
         name: 'Dentures',
-        desc: 'Removable full or partial arch replacements for missing teeth.',
-        symptoms: ['Loss of all or multiple teeth', 'Saggy facial cheeks'],
-        benefits: ['Supports facial structure', 'Restores speech and chewing ability'],
-        duration: '3 - 4 sessions',
-        recovery: '1 - 2 weeks adjustment'
+        desc: 'Premium removable partial or complete arches to replace extensive missing teeth.',
+        symptoms: ['Many or all missing teeth', 'Sagging facial muscles', 'Difficulty eating'],
+        benefits: ['Improves facial support', 'Budget-friendly teeth replacement', 'Restores bite function'],
+        duration: '3 - 4 sessions (impressions & fittings)',
+        recovery: 'Adaptation: 2 - 3 weeks'
       }
     ]
   },
   {
     id: 'rootcanal',
-    name: 'Root Canal Treatment',
+    name: 'Root Canal',
     icon: '⚡',
-    summary: 'Microscope-assisted endodontics to save infected teeth and eliminate persistent nerve pain.',
+    summary: 'Single-sitting endodontic treatments to clean infected pulp channels and preserve natural teeth.',
     subs: [
       {
-        name: 'Single-Sitting Root Canal',
-        desc: 'Advanced micro-endodontic therapy removing tooth infection in a single 60-minute visit.',
-        symptoms: ['Severe throbbing toothache', 'Pain when biting', 'Sensitivity to hot foods'],
-        benefits: ['Pain-free therapy', 'Saves natural tooth structure', 'Saves multiple clinic visits'],
+        name: 'Single-Sitting RCT',
+        desc: 'Modern pain-free treatment to remove infected tooth pulp and seal root canals in a single visit.',
+        symptoms: ['Severe throbbing tooth pain', 'Pain while chewing', 'Sensitivity to hot foods'],
+        benefits: ['Immediate pain resolution', 'Saves the natural tooth', 'Completed in just 45-60 minutes'],
         duration: '45 - 60 minutes',
-        recovery: '1 - 2 days minor soreness'
+        recovery: '1 - 2 days (avoid hard chewing)'
       },
       {
-        name: 'Re-Root Canal Treatment',
-        desc: 'Correcting and recleaning a previously failed or reinfected root canal treated tooth.',
-        symptoms: ['Pain in previously treated tooth', 'Gum swelling near capped tooth'],
-        benefits: ['Resolves hidden infections', 'Prevents extraction of crowned tooth'],
+        name: 'Micro-Endodontic Re-RCT',
+        desc: 'Re-treatment of previously failed root canals using precision microscopic visualization.',
+        symptoms: ['Returning pain in post-RCT tooth', 'Abscess or swelling near tooth'],
+        benefits: ['Avoids extraction of failed cases', 'Thorough disinfection of micro-channels'],
         duration: '1 - 2 sessions',
-        recovery: '2 - 3 days'
+        recovery: '1 - 2 days'
       }
     ]
   },
   {
     id: 'implants',
     name: 'Dental Implants',
-    icon: '🔩',
-    summary: 'Permanent biocompatible titanium implants acting as secure roots for missing teeth.',
+    icon: '🦷',
+    summary: 'Permanent biocompatible posts anchored to the bone, offering full root replacement.',
     subs: [
       {
-        name: 'Single-Tooth Implant',
-        desc: 'Replacing a single missing tooth without affecting neighboring teeth.',
-        symptoms: ['One missing tooth', 'Difficulty chewing in a specific area'],
-        benefits: ['Looks and acts like a real tooth', 'Prevents bone loss in jaw'],
-        duration: 'Surgical placement: 30-45 mins (Healing: 3 months)',
-        recovery: '3 - 5 days'
+        name: 'Single Tooth Implant',
+        desc: 'Biocompatible titanium post and custom porcelain crown to restore a single missing space.',
+        symptoms: ['Single missing tooth', 'Wishes to avoid dental bridge shaving'],
+        benefits: ['Preserves adjacent healthy teeth', 'Halts jawbone bone loss', 'Feels and looks like natural tooth'],
+        duration: '3 - 6 months (incorporates healing time)',
+        recovery: 'Initial: 3 - 5 days'
       },
       {
-        name: 'Full-Mouth Implants',
-        desc: 'Complete fixed arch replacement using advanced implant mapping layouts (All-on-4 or All-on-6).',
-        symptoms: ['All teeth missing', 'Loose fitting dentures'],
-        benefits: ['Full bite rehabilitation', 'No slips or painful clicks', 'Lifetime durability'],
-        duration: 'Multi-stage process over 3-6 months',
-        recovery: '7 - 10 days post-surgery'
+        name: 'Full Mouth Implants',
+        desc: 'Complete restoration of top or bottom arches using advanced All-on-4 or All-on-6 protocols.',
+        symptoms: ['All teeth missing or failing', 'Loose dentures', 'Severe bone loss'],
+        benefits: ['Permanent fixed arches', 'Fully restores natural bite strength', 'Youthful facial structures'],
+        duration: '3 - 6 months',
+        recovery: 'Initial: 5 - 7 days'
       }
     ]
   },
@@ -198,93 +198,101 @@ export const treatmentData: TreatmentCategory[] = [
     id: 'orthodontics',
     name: 'Orthodontics',
     icon: '🦷',
-    summary: 'Bite correction and teeth alignment treatments for all age groups.',
+    summary: 'Treatments designed to straighten teeth align curves, and adjust bite relations.',
     subs: [
       {
         name: 'Clear Aligners',
-        desc: 'Nearly invisible, removable customized medical plastic trays to straighten teeth.',
-        symptoms: ['Crooked teeth', 'Crowded arches', 'Gaps between teeth'],
-        benefits: ['Virtually invisible', 'Removable for eating & brushing', 'Extremely comfortable design'],
+        desc: 'Virtually invisible removable transparent custom aligners to correct teeth alignment.',
+        symptoms: ['Crooked or crowded teeth', 'Visible gaps', 'Bite alignment concerns'],
+        benefits: ['Esthetic transparency', 'No diet restrictions (removable)', 'Easier brushing and flossing'],
         duration: '6 - 18 months',
-        recovery: 'None (mild pressure with new trays)'
+        recovery: 'None (temporary light pressure with new trays)'
       },
       {
-        name: 'Metal & Ceramic Braces',
-        desc: 'Traditional and tooth-colored ceramic bracket systems for complex bite realignment.',
-        symptoms: ['Severe bite misalignment', 'Underbites/Overbites'],
-        benefits: ['Highly predictable results', 'Effective for complex orthodontic movements'],
+        name: 'Ceramic & Metal Braces',
+        desc: 'Classic orthodontic brackets to resolve complex bite issues and teeth alignments.',
+        symptoms: ['Severe teeth crowding', 'Deep bite or underbite', 'Complex jaw mismatches'],
+        benefits: ['Highly effective for severe cases', 'Precise teeth movement control'],
         duration: '12 - 24 months',
-        recovery: 'Adjustment period of 1 week'
+        recovery: 'Adaptation: 1 - 2 weeks'
       }
     ]
   },
   {
     id: 'whitening',
     name: 'Teeth Whitening',
-    icon: '💡',
-    summary: 'Premium stain-removal systems providing instant teeth shade improvements.',
+    icon: '✨',
+    summary: 'Professional enamel bleaching to lift deep food stains and reveal a brighter tone.',
     subs: [
       {
         name: 'In-Clinic Whitening',
-        desc: 'Fast, laser-activated whitening gel application achieving up to 8 shades lighter in 1 hour.',
-        symptoms: ['Stained enamel', 'Yellow teeth from coffee/smoking'],
-        benefits: ['Instant results in one visit', 'Safe gums protection protocol', 'Long-lasting shine'],
-        duration: '60 minutes',
-        recovery: 'Avoid colored food for 48 hours'
+        desc: 'Advanced light-activated bleaching procedure delivering immediate shade improvements.',
+        symptoms: ['Teeth yellowing or staining', 'Wishes for quick smile brightening'],
+        benefits: ['Up to 8 shades lighter in 1 hour', 'Safe, monitored procedure'],
+        duration: '45 - 60 minutes',
+        recovery: 'None (mild temporary sensitivity)'
+      },
+      {
+        name: 'Home Whitening Kits',
+        desc: 'Custom-fit bleach trays and professional gels for convenient whitening at home.',
+        symptoms: ['Desires gradual whitening control', 'Wishes to maintain clinic results'],
+        benefits: ['Convenient home schedule', 'Customized trays prevent gum contact'],
+        duration: '7 - 10 days (use 30 mins daily)',
+        recovery: 'None'
       }
     ]
   },
   {
     id: 'children',
     name: 'Children\'s Dentistry',
-    icon: '🧸',
-    summary: 'Gentle, friendly oral health checkups and preventive therapies customized for children.',
+    icon: '👶',
+    summary: 'Pediatric diagnostics, protective sealants, and gentle dental habits coaching.',
     subs: [
       {
-        name: 'First Dental Visit',
-        desc: 'Anxiety-free orientation visit to build dental confidence and check jaw development.',
-        symptoms: ['Child reaching 1 year of age', 'Preventing dental phobia'],
-        benefits: ['Positive dental association', 'Early bite alignment check'],
-        duration: '20 minutes',
-        recovery: 'None'
+        name: 'Fluoride Applications',
+        desc: 'Professional gel layers protecting developing teeth enamel from cavity attacks.',
+        symptoms: ['Early signs of enamel soft spots', 'High cavity risk indicators'],
+        benefits: ['Strengthens kids tooth enamel', 'Completely pain-free guard layer'],
+        duration: '15 minutes',
+        recovery: 'None (avoid food/drink for 30 minutes)'
       },
       {
-        name: 'Fluoride Treatment',
-        desc: 'Applying protective fluoride varnish to strengthen developing enamel against acid decay.',
-        symptoms: ['High risk of cavities', 'Early chalky white spots'],
-        benefits: ['Remineralizes tooth enamel', 'Reduces cavity risk by 40%'],
-        duration: '10 minutes',
-        recovery: 'None (avoid drinking for 30 mins)'
+        name: 'Pit & Fissure Sealants',
+        desc: 'Protective resin seal layers brushed onto deep chewing grooves of primary molars.',
+        symptoms: ['Deep molar grooves', 'Food catching on chewing surfaces'],
+        benefits: ['Virtually eliminates food trap decay', 'Long-lasting molar shield'],
+        duration: '10 minutes per tooth',
+        recovery: 'None'
       }
     ]
   },
   {
     id: 'gum',
     name: 'Gum Treatment',
-    icon: '🌿',
-    summary: 'Scaling, root planing, and laser surgery to manage periodontal infections.',
+    icon: '🦷',
+    summary: 'Scaling, root planing, and laser therapy to resolve gingivitis and support structures.',
     subs: [
       {
         name: 'Scaling & Root Planing',
-        desc: 'Deep cleaning below the gum line to remove deep tartar pockets and smooth tooth roots.',
-        symptoms: ['Bleeding gums', 'Loose teeth', 'Receding gum line'],
-        benefits: ['Stops progression of periodontitis', 'Reduces gum pocket depths'],
-        duration: '1 - 2 sessions',
-        recovery: '24 hours minor sensitivity'
+        desc: 'Deep cleaning below the gum line to remove infected plaque and smooth roots.',
+        symptoms: ['Bleeding gums', 'Swelling and bad breath', 'Receding gum margin'],
+        benefits: ['Stops early gum disease progression', 'Resolves pocket infection sites'],
+        duration: '45 - 60 minutes',
+        recovery: '1 - 2 days'
       }
     ]
   },
   {
     id: 'surgery',
     name: 'Oral Surgery',
-    icon: '🏥',
-    summary: 'Surgical tooth extractions, wisdom teeth removal, and bone restructuring.',
+    icon: '🦷',
+    summary: 'Surgical extraction of impacted teeth, wisdom teeth care, and tissue repairs.',
     subs: [
       {
-        name: 'Wisdom Tooth Removal',
-        desc: 'Surgical extraction of impacted, painful, or misaligned wisdom teeth.',
-        symptoms: ['Pain in the back jaw', 'Swollen gums near back molar', 'Crowding of back teeth'],
-        benefits: ['Prevents molar crowding', 'Resolves deep jaw pain & infection'],
+        name: 'Wisdom Teeth Surgery',
+        desc: 'Safe surgical extraction of impacted or misaligned third molar wisdom teeth.',
+        symptoms: ['Jaw pain behind molars', 'Swelling at back gums', 'Crooked wisdom tooth erupting'],
+        benefits: ['Avoids crowding of healthy teeth', 'Resolves pain and gum infections'],
         duration: '45 - 60 minutes',
         recovery: '3 - 5 days'
       }
@@ -294,7 +302,7 @@ export const treatmentData: TreatmentCategory[] = [
     id: 'emergency',
     name: 'Emergency Dentistry',
     icon: '🚨',
-    summary: 'Priority dental services for sudden pain, injury, fractures, or bleeding.',
+    summary: 'Urgent pain relief, broken tooth support, and immediate trauma evaluations.',
     subs: [
       {
         name: 'Severe Toothache Treatment',
@@ -334,16 +342,33 @@ interface TreatmentsProps {
 export const Treatments: React.FC<TreatmentsProps> = ({
   selectedCategory,
   setSelectedCategory,
-  setCurrentPage,
   setCurrentSubcategory,
 }) => {
   const currentCat = treatmentData.find((c) => c.id === selectedCategory) || treatmentData[0];
-
   const handleSubClick = (sub: TreatmentSub) => {
     setCurrentSubcategory(sub);
-    setCurrentPage('treatment-detail');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Cinematic Scroll reveal trigger (play only once, threshold 0.22)
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>('.reveal, .reveal-left, .reveal-right');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('in-view'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.22 });
+
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [selectedCategory]);
 
   return (
     <div className="page treatments-page fade-in">
@@ -374,7 +399,7 @@ export const Treatments: React.FC<TreatmentsProps> = ({
 
       {/* Selected Category Content */}
       <section className="category-details-section">
-        <div className="category-header glass-card">
+        <div className="category-header glass-card reveal">
           <span className="large-icon">{currentCat.icon}</span>
           <h2>{currentCat.name}</h2>
           <p>{currentCat.summary}</p>
@@ -382,7 +407,7 @@ export const Treatments: React.FC<TreatmentsProps> = ({
 
         <div className="subcategories-grid">
           {currentCat.subs.map((sub, idx) => (
-            <div key={idx} className="subcategory-card glass-card" onClick={() => handleSubClick(sub)}>
+            <div key={idx} className="subcategory-card reveal" onClick={() => handleSubClick(sub)}>
               <h3>{sub.name}</h3>
               <p>{sub.desc}</p>
               <div className="card-meta">
@@ -396,7 +421,7 @@ export const Treatments: React.FC<TreatmentsProps> = ({
       </section>
 
       {/* Comparison Tool */}
-      <section className="comparison-section glass-card">
+      <section className="comparison-section glass-card reveal">
         <h2>Treatment Options Comparison</h2>
         <p className="subtitle">Let us help you understand the differences between common treatments.</p>
         <div className="comparison-table-wrapper">

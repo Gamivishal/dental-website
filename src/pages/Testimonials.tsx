@@ -25,6 +25,24 @@ export const Testimonials: React.FC = () => {
     }
   ]);
 
+  const reviewCategories = [
+    { title: 'Smile Makeovers', count: '248 reviews', summary: 'Veneers, bonding, and full smile design cases.' },
+    { title: 'Root Canal Care', count: '196 reviews', summary: 'Single-sitting and microscopic endodontic care.' },
+    { title: 'Implants & Restorations', count: '164 reviews', summary: 'Long-term function, comfort, and bite stability.' },
+    { title: 'Family Dentistry', count: '312 reviews', summary: 'Routine checkups, cleanings, and preventive visits.' },
+  ];
+
+  const googleReviews = [
+    { name: 'Anjali P.', stars: 5, text: 'The clinic was spotless and the team explained every step clearly. My crown treatment was smooth and painless.' },
+    { name: 'Mohit S.', stars: 5, text: 'Best dental experience I have had. The digital scan and treatment planning felt very modern and precise.' },
+    { name: 'Farah K.', stars: 5, text: 'I found them through Google and the experience matched the ratings. Friendly staff, transparent pricing, and excellent care.' },
+  ];
+
+  const warrantyReviews = [
+    { name: 'Ritika J.', text: 'The warranty support on my restorative work gave me real confidence to proceed with treatment.' },
+    { name: 'Arjun M.', text: 'They explained what was covered before treatment and honored every follow-up exactly as promised.' },
+  ];
+
   const [formName, setFormName] = useState('');
   const [formTreatment, setFormTreatment] = useState('Smile Makeover');
   const [formRating, setFormRating] = useState(5);
@@ -86,6 +104,24 @@ export const Testimonials: React.FC = () => {
         </div>
       </section>
 
+      {/* Treatment-Based Review Categories */}
+      <section className="review-categories-section">
+        <div className="section-header">
+          <span>REVIEW CATEGORIES</span>
+          <h2>Treatment-Based Review Categories</h2>
+          <p>See what patients say about the treatment that matters most to them.</p>
+        </div>
+        <div className="category-cards-grid">
+          {reviewCategories.map((category) => (
+            <article key={category.title} className="category-card glass-card">
+              <h3>{category.title}</h3>
+              <strong>{category.count}</strong>
+              <p>{category.summary}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* Video Testimonials */}
       <section className="video-testimonials-section">
         <div className="section-header">
@@ -109,6 +145,53 @@ export const Testimonials: React.FC = () => {
             <h4>Implant Rehabilitation Journey</h4>
             <p>"Robert details his full-arch implant recovery and eating standard foods again."</p>
           </div>
+        </div>
+      </section>
+
+      {/* Google Reviews */}
+      <section className="google-reviews-section">
+        <div className="section-header">
+          <span>GOOGLE REVIEWS</span>
+          <h2>What People Say on Google</h2>
+          <p>Highlights from public patient feedback across our clinic listings.</p>
+        </div>
+        <div className="google-reviews-grid">
+          {googleReviews.map((review) => (
+            <article key={review.name} className="google-review-card glass-card">
+              <div className="review-stars">{'★'.repeat(review.stars)}</div>
+              <p>{review.text}</p>
+              <strong>{review.name}</strong>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Patient Story */}
+      <section className="featured-story-section glass-card">
+        <div className="featured-story-content">
+          <span>FEATURED PATIENT STORY</span>
+          <h2>From Dental Anxiety to a Confident Smile</h2>
+          <p>
+            Priya came in worried about multiple treatments, but after a detailed scan, a gentle treatment plan,
+            and step-by-step explanations, she completed her smile makeover without pain or stress.
+          </p>
+        </div>
+      </section>
+
+      {/* Warranty Experience Reviews */}
+      <section className="warranty-reviews-section">
+        <div className="section-header">
+          <span>WARRANTY EXPERIENCE</span>
+          <h2>Warranty Experience Reviews</h2>
+          <p>Patients appreciate the confidence that comes with our documented treatment warranty program.</p>
+        </div>
+        <div className="warranty-reviews-grid">
+          {warrantyReviews.map((review) => (
+            <article key={review.name} className="warranty-review-card glass-card">
+              <h3>{review.name}</h3>
+              <p>{review.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -203,6 +286,15 @@ export const Testimonials: React.FC = () => {
             Submit Review
           </button>
         </form>
+      </section>
+
+      {/* Book an Appointment */}
+      <section className="book-appointment-section glass-card">
+        <h2>Book an Appointment</h2>
+        <p>Schedule your consultation and we will help you choose the right treatment path.</p>
+        <button type="button" className="cta-button primary-cta" onClick={() => window.location.hash = '#/enquiry'}>
+          Book an Appointment
+        </button>
       </section>
     </div>
   );

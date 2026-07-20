@@ -1,18 +1,25 @@
-# Task Checklist: Dental Studio Website Redesign
+# Task Checklist: Site-Wide Premium Cinematic Scroll Animations
 
-- [x] Core Style Tokens Setup (`index.css`)
-  - [x] Set root color CSS variables to primary blue (#0099D8), teal (#00C4B3), white backgrounds, and light gray borders.
-  - [x] Adjust global button, scrollbar, card layout base properties.
-- [x] Layout Theme Updates (`App.css`)
-  - [x] Redesign Navigation Header (white sticky navbar, elegant dropdown menus, modern hover triggers).
-  - [x] Redesign Footer (crisp white & blue multi-column design, readable text, social icons).
-  - [x] Redesign Mobile drawer nav and sticky bottom call/book actions.
-- [x] Page Sections Overhaul (`App.css`)
-  - [x] Redesign Hero section with bright gradient backgrounds and floating illustration animation.
-  - [x] Update cards (warranty, quick actions, featured treatments, comfort details) to white background, rounded edges, and hover lift effects.
-  - [x] Redesign Doctor section and clinic tour details with medical theme layouts.
-  - [x] Update Before-and-After smile slider components (blue-teal handle, smooth inputs).
-  - [x] Modernize Forms, labels, focus styles, radio buttons, and upload cards.
-- [x] Build & Responsiveness Check
-  - [x] Run typescript checks and vite build compiler (`npm run build`).
-  - [x] Confirm layout scales beautifully on desktop, tablet, and mobile views.
+- [x] Configure IntersectionObserver triggers in pages
+  - [x] Home Page (`src/pages/Home.tsx`): Set viewport threshold to 0.22, play only once, add mouse parallax and count-up counters
+  - [x] Smile Gallery Page (`src/pages/SmileGallery.tsx`): Set viewport threshold to 0.22, play only once
+  - [x] Patient Info Page (`src/pages/PatientInfo.tsx`): Set viewport threshold to 0.22, play only once
+  - [x] Enquiry Page (`src/pages/Enquiry.tsx`): Set viewport threshold to 0.22, play only once
+  - [x] Contact Page (`src/pages/Contact.tsx`): Set viewport threshold to 0.22, play only once
+  - [x] About Page (`src/pages/About.tsx`): Register new scroll reveal trigger, set viewport threshold to 0.22, add reveal classes
+  - [x] Treatments Page (`src/pages/Treatments.tsx`): Register tab-aware scroll reveal trigger, set viewport threshold to 0.22, add reveal classes
+- [x] Implement Global Layout Animations in `src/App.tsx`
+  - [x] Add window scroll listener to feed `--scroll-y` parallax custom property
+  - [x] Embed three floating background geometric shapes inside page content wrapper
+- [x] Implement Style & Keyframe Enhancements in `src/App.css`
+  - [x] Global reveal variables: duration 1.3s, ease-out-expo `cubic-bezier(0.22, 1, 0.36, 1)`, scale/translate offsets
+  - [x] Stagger delay rules: 150ms step intervals for grid cards, timeline components, team items, and faq rows
+  - [x] Hero section mouse parallax transforms and float-up text timings
+  - [x] Floating scroll indicator (animated mouse mousewheel) in Hero footer
+  - [x] Background floating decoration keyframe translations
+  - [x] Parallax offset translates using `--scroll-y` variable
+  - [x] Ripple light-shine hover sweeps on buttons
+  - [x] Soft glowing green shadows and luxurious transition eases on card elevations
+- [x] Verify layout responsiveness
+  - [x] Check prefers-reduced-motion safety
+  - [x] Ensure 60 FPS rendering using GPU-accelerated transforms

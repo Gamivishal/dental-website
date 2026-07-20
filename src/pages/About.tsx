@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ceoImg from '../assets/images/CEO.jpeg';
 import clinicImg1 from '../assets/images/Clinic.jpeg';
 import clinicImg2 from '../assets/images/Clinic 2.jpeg';
@@ -7,12 +7,57 @@ import waitingImg1 from '../assets/images/Waiting.jpeg';
 import waitingImg2 from '../assets/images/Waiting 2.jpeg';
 
 export const About: React.FC = () => {
+  // Cinematic Scroll reveal trigger (play only once, threshold 0.22)
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>('.reveal, .reveal-left, .reveal-right');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('in-view'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.22 });
+
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   const clinicTourImages = [
     { src: entryImg, label: 'Welcoming Clinic Entrance' },
     { src: waitingImg1, label: 'Lounge Waiting Area' },
     { src: waitingImg2, label: 'Premium Consulting Suite' },
     { src: clinicImg1, label: 'Main Operatory & Microscopy Set' },
     { src: clinicImg2, label: 'Advanced Diagnostics & Digital X-ray Suite' },
+  ];
+
+  const teamMembers = [
+    {
+      name: 'Dr. Sheekha Shah',
+      role: 'Chief Endodontist & CEO',
+      bio: 'Creates precision-led treatment plans focused on painless care, long-term oral health, and elevated aesthetics.',
+      image: ceoImg,
+      imageClassName: 'team-card-img team-card-img--portrait',
+    },
+    {
+      name: 'Dr. Nidhi Rao',
+      role: 'Senior Cosmetic Dentist',
+      bio: 'Specialises in smile design, restorative artistry, and comfortable cosmetic dentistry for confident results.',
+      image: clinicImg1,
+      imageClassName: 'team-card-img',
+    },
+    {
+      name: 'Ms. Priya Menon',
+      role: 'Clinical Coordinator',
+      bio: 'Ensures every visit is smooth, reassuring, and fully tailored to the patient’s comfort and treatment goals.',
+      image: clinicImg2,
+      imageClassName: 'team-card-img',
+    },
   ];
 
   return (
@@ -29,13 +74,13 @@ export const About: React.FC = () => {
       {/* Chief Dentist Profile */}
       <section className="doctor-profile-section">
         <div className="doctor-profile-grid">
-          <div className="doctor-image-container">
+          <div className="doctor-image-container reveal-left">
             <img src={ceoImg} alt="Dr. Sheekha Shah CEO Profile" className="doctor-profile-img" />
             <div className="doctor-credentials-badge">
               🏆 ISO 9001 Leading Clinician
             </div>
           </div>
-          <div className="doctor-bio-info">
+          <div className="doctor-bio-info reveal-right">
             <span>CHIEF ENDODONTIST & CEO</span>
             <h2>Dr. Sheekha Shah</h2>
             <p className="subtitle">M.D.S. in Conservative Dentistry & Micro-Endodontics</p>
@@ -64,8 +109,31 @@ export const About: React.FC = () => {
         </div>
       </section>
 
+      {/* Professional Journey */}
+      <section className="professional-journey-section">
+        <div className="section-header reveal">
+          <span>PROFESSIONAL JOURNEY</span>
+          <h2>From Specialist Training to Modern Dental Leadership</h2>
+          <p>Dr. Sheekha Shah’s career reflects a steady pursuit of precision, education, and patient-centered excellence.</p>
+        </div>
+        <div className="journey-timeline">
+          <div className="journey-card glass-card reveal">
+            <h3>Clinical Foundation</h3>
+            <p>Her early career focused on conservative dentistry, endodontics, and restorative care built around comfort and long-term function.</p>
+          </div>
+          <div className="journey-card glass-card reveal">
+            <h3>Advanced Specialisation</h3>
+            <p>She developed expertise in microscopic endodontics and laser-assisted treatment, enabling more accurate and less invasive care.</p>
+          </div>
+          <div className="journey-card glass-card reveal">
+            <h3>Leadership & Innovation</h3>
+            <p>Today, she leads a premium clinic where technology, sterilisation, and compassionate treatment come together seamlessly.</p>
+          </div>
+        </div>
+      </section>
+
       {/* Message from the Dentist */}
-      <section className="dentist-message-banner glass-card">
+      <section className="dentist-message-banner glass-card reveal">
         <h2>A Personal Message to Our Patients</h2>
         <blockquote>
           "At Oceanview, we invest in the most advanced dental technologies—from digital microscopes to dental lasers—not because it's trendy, but because it ensures our patients receive the most precise, pain-free, and safe treatments. We treat every patient like family, guaranteeing absolute transparency and premium care."
@@ -73,16 +141,37 @@ export const About: React.FC = () => {
         </blockquote>
       </section>
 
+      {/* Meet the Team */}
+      <section className="team-section">
+        <div className="section-header reveal">
+          <span>MEET THE TEAM</span>
+          <h2>Experienced Professionals Who Care for Every Detail</h2>
+          <p>Our clinicians and support staff work together to create a calm, meticulous, and reassuring patient experience.</p>
+        </div>
+        <div className="team-grid">
+          {teamMembers.map((member) => (
+            <article key={member.name} className="team-card glass-card reveal">
+              <img src={member.image} alt={member.name} className={member.imageClassName} />
+              <div className="team-card-body">
+                <h3>{member.name}</h3>
+                <p className="team-role">{member.role}</p>
+                <p>{member.bio}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* Clinic Tour */}
       <section className="clinic-tour-section">
-        <div className="section-header">
+        <div className="section-header reveal">
           <span>CLINIC TOUR</span>
           <h2>Our World-Class Dental Facility</h2>
           <p>Walk through our clean, modern, and hygienic dental studio spaces.</p>
         </div>
         <div className="tour-gallery-grid">
           {clinicTourImages.map((img, idx) => (
-            <div key={idx} className="gallery-card glass-card">
+            <div key={idx} className="gallery-card glass-card reveal">
               <img src={img.src} alt={img.label} className="gallery-img" />
               <div className="gallery-card-label">{img.label}</div>
             </div>
@@ -91,7 +180,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* Technology & Sterilisation */}
-      <section className="tech-sterilization-section">
+      <section className="tech-sterilization-section reveal">
         <div className="tech-grid">
           <div className="tech-col">
             <h2>Micro-Dentistry & Technology</h2>
@@ -119,7 +208,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* Core Values & Awards */}
-      <section className="awards-values-section">
+      <section className="awards-values-section reveal">
         <div className="values-grid">
           <div className="values-card glass-card">
             <h3>Our Core Values</h3>
