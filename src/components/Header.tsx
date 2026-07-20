@@ -56,10 +56,6 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
         {/* Logo / Brand */}
         <div className="header-logo" onClick={() => handleNav('home')}>
           <img src={logoImg} alt="Oceanview Dental Studio Logo" className="logo-img" />
-          <div className="logo-text">
-            <span className="brand-name">OCEANVIEW</span>
-            <span className="brand-sub">DENTAL STUDIO</span>
-          </div>
         </div>
 
         {/* Desktop Navigation */}
