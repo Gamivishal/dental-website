@@ -80,6 +80,8 @@ export const Testimonials: React.FC = () => {
     { title: 'Root Canal Care', count: 196, label: 'reviews', summary: 'Single-sitting and microscopic endodontic care.' },
     { title: 'Implants & Restorations', count: 164, label: 'reviews', summary: 'Long-term function, comfort, and bite stability.' },
     { title: 'Family Dentistry', count: 312, label: 'reviews', summary: 'Routine checkups, cleanings, and preventive visits.' },
+    { title: 'Clear Aligners', count: 180, label: 'reviews', summary: 'Invisible teeth straightening and bite alignment.' },
+    { title: 'Teeth Whitening', count: 220, label: 'reviews', summary: 'Laser whitening for immediate aesthetic enhancement.' },
   ];
 
   const googleReviews = [
@@ -100,6 +102,9 @@ export const Testimonials: React.FC = () => {
   const [formText, setFormText] = useState('');
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // Active Playing Video State
+  const [activeVideoUrl, setActiveVideoUrl] = useState<string | null>(null);
+
   // Google Reviews slider state
   const [googleSlideIdx, setGoogleSlideIdx] = useState(0);
   const [googleHovered, setGoogleHovered] = useState(false);
@@ -112,6 +117,30 @@ export const Testimonials: React.FC = () => {
     }, 5000);
     return () => clearInterval(timer);
   }, [googleReviews.length, googleHovered]);
+
+  // Categories Carousel Ref & Mouse Wheel Handler
+  const categoriesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = categoriesRef.current;
+    if (!el) return;
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    };
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, []);
+
+  const handleCatLeft = () => {
+    categoriesRef.current?.scrollBy({ left: -320, behavior: 'smooth' });
+  };
+
+  const handleCatRight = () => {
+    categoriesRef.current?.scrollBy({ left: 320, behavior: 'smooth' });
+  };
 
   // Scroll reveal observer
   useEffect(() => {
@@ -153,13 +182,14 @@ export const Testimonials: React.FC = () => {
     setReviews([newReview, ...reviews]);
     setFormName('');
     setFormText('');
+    setFormRating(5);
     setSubmitSuccess(true);
     setTimeout(() => setSubmitSuccess(false), 5000);
   };
 
   return (
     <div className="page testimonials-page fade-in">
-
+      
       {/* 1. Testimonials Hero */}
       <section className="testimonials-hero-premium">
         <div className="hero-background-overlay" />
@@ -188,7 +218,7 @@ export const Testimonials: React.FC = () => {
               <div className="stars-glowing">★★★★★</div>
               <p>Based on <AnimatedCounter target={1200} suffix="+" /> patient reviews</p>
             </div>
-
+            
             <div className="rating-platforms-premium">
               <div className="platform-card-premium glass-card">
                 <span className="platform-icon">🌐</span>
@@ -213,7 +243,7 @@ export const Testimonials: React.FC = () => {
               </div>
             </div>
           </div>
-
+          
           <div className="trust-badges-row">
             <div className="trust-badge">
               <span className="badge-bullet">✔</span> Google Top Rated Clinic
@@ -231,7 +261,7 @@ export const Testimonials: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Treatment-Based Review Categories */}
+      {/* 3. Treatment-Based Review Categories Carousel */}
       <section className="review-categories-section-premium alternate-bg">
         <div className="premium-container">
           <div className="section-header-premium reveal">
@@ -239,20 +269,26 @@ export const Testimonials: React.FC = () => {
             <h2>Treatment-Based Review Categories</h2>
             <p>See what patients say about the treatment that matters most to them.</p>
           </div>
+          
+          <div className="categories-carousel-wrapper reveal">
+            <button className="carousel-nav-btn left" onClick={handleCatLeft} aria-label="Scroll Left">◀</button>
+            
+            <div className="categories-carousel-track" ref={categoriesRef}>
+              {reviewCategories.map((category) => (
+                <article key={category.title} className="category-card-premium glass-card">
+                  <div className="card-top">
+                    <h3>{category.title}</h3>
+                    <strong className="case-count">
+                      <AnimatedCounter target={category.count} suffix={` ${category.label}`} />
+                    </strong>
+                  </div>
+                  <p>{category.summary}</p>
+                  <div className="card-bottom-accent" />
+                </article>
+              ))}
+            </div>
 
-          <div className="category-cards-grid-premium reveal">
-            {reviewCategories.map((category) => (
-              <article key={category.title} className="category-card-premium glass-card">
-                <div className="card-top">
-                  <h3>{category.title}</h3>
-                  <strong className="case-count">
-                    <AnimatedCounter target={category.count} suffix={` ${category.label}`} />
-                  </strong>
-                </div>
-                <p>{category.summary}</p>
-                <div className="card-bottom-accent" />
-              </article>
-            ))}
+            <button className="carousel-nav-btn right" onClick={handleCatRight} aria-label="Scroll Right">▶</button>
           </div>
         </div>
       </section>
@@ -264,21 +300,48 @@ export const Testimonials: React.FC = () => {
             <span>VIDEO REVIEWS</span>
             <h2>Patient Story Highlights</h2>
           </div>
-
+          
           <div className="video-cards-grid-premium">
+            {/* Card 1: Veneers Story */}
             <div className="video-luxury-card glass-card reveal-left">
               <div className="video-thumbnail-container">
-                <img
-                  src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600"
-                  alt="Veneers Transformation Story Preview"
-                  className="video-thumb-img"
-                />
-                <div className="video-thumbnail-overlay">
-                  <button className="glowing-play-btn" aria-label="Play Veneers Story">
-                    <span className="play-triangle">▶</span>
-                  </button>
-                  <span className="duration-pill">1:42</span>
-                </div>
+                {activeVideoUrl === 'veneers' ? (
+                  <div className="video-player-wrapper">
+                    <video
+                      controls
+                      autoPlay
+                      className="video-player-element"
+                      src="https://assets.mixkit.co/videos/preview/mixkit-dentist-examining-a-patients-teeth-41427-large.mp4"
+                    >
+                      Your browser does not support video playback.
+                    </video>
+                    <button
+                      className="close-video-btn"
+                      onClick={() => setActiveVideoUrl(null)}
+                      title="Close Video"
+                    >
+                      ✕ Close Video
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <img
+                      src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600"
+                      alt="Veneers Transformation Story Preview"
+                      className="video-thumb-img"
+                    />
+                    <div className="video-thumbnail-overlay">
+                      <button
+                        className="glowing-play-btn"
+                        onClick={() => setActiveVideoUrl('veneers')}
+                        aria-label="Play Veneers Story Video"
+                      >
+                        <span className="play-triangle">▶</span>
+                      </button>
+                      <span className="duration-pill">1:42</span>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="video-card-body">
                 <h4>Veneers Transformation Story</h4>
@@ -286,19 +349,46 @@ export const Testimonials: React.FC = () => {
               </div>
             </div>
 
+            {/* Card 2: Implant Journey */}
             <div className="video-luxury-card glass-card reveal-right">
               <div className="video-thumbnail-container">
-                <img
-                  src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=600"
-                  alt="Implant Rehabilitation Journey Preview"
-                  className="video-thumb-img"
-                />
-                <div className="video-thumbnail-overlay">
-                  <button className="glowing-play-btn" aria-label="Play Implant Story">
-                    <span className="play-triangle">▶</span>
-                  </button>
-                  <span className="duration-pill">2:15</span>
-                </div>
+                {activeVideoUrl === 'implant' ? (
+                  <div className="video-player-wrapper">
+                    <video
+                      controls
+                      autoPlay
+                      className="video-player-element"
+                      src="https://assets.mixkit.co/videos/preview/mixkit-dentist-working-on-a-patients-teeth-41428-large.mp4"
+                    >
+                      Your browser does not support video playback.
+                    </video>
+                    <button
+                      className="close-video-btn"
+                      onClick={() => setActiveVideoUrl(null)}
+                      title="Close Video"
+                    >
+                      ✕ Close Video
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <img
+                      src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=600"
+                      alt="Implant Rehabilitation Journey Preview"
+                      className="video-thumb-img"
+                    />
+                    <div className="video-thumbnail-overlay">
+                      <button
+                        className="glowing-play-btn"
+                        onClick={() => setActiveVideoUrl('implant')}
+                        aria-label="Play Implant Story Video"
+                      >
+                        <span className="play-triangle">▶</span>
+                      </button>
+                      <span className="duration-pill">2:15</span>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="video-card-body">
                 <h4>Implant Rehabilitation Journey</h4>
@@ -317,8 +407,8 @@ export const Testimonials: React.FC = () => {
             <h2>What People Say on Google</h2>
             <p>Highlights from public patient feedback across our clinic listings.</p>
           </div>
-
-          <div
+          
+          <div 
             className="google-slider-container glass-card reveal"
             onMouseEnter={() => setGoogleHovered(true)}
             onMouseLeave={() => setGoogleHovered(false)}
@@ -326,8 +416,8 @@ export const Testimonials: React.FC = () => {
             <span className="g-decor">G</span>
             <div className="google-slider-wrapper">
               {googleReviews.map((review, idx) => (
-                <article
-                  key={review.name}
+                <article 
+                  key={review.name} 
                   className={`google-slide-item ${googleSlideIdx === idx ? 'active' : ''}`}
                 >
                   <div className="review-stars-glowing">{'★'.repeat(review.stars)}</div>
@@ -336,7 +426,7 @@ export const Testimonials: React.FC = () => {
                 </article>
               ))}
             </div>
-
+            
             {/* Dots */}
             <div className="google-slider-dots">
               {googleReviews.map((_, idx) => (
@@ -357,14 +447,14 @@ export const Testimonials: React.FC = () => {
         <div className="premium-container">
           <div className="featured-grid-premium">
             <div className="featured-image-wrapper reveal-left">
-              <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600"
-                alt="Priya Smile Makeover Success"
-                className="featured-patient-img"
+              <img 
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600" 
+                alt="Priya Smile Makeover Success" 
+                className="featured-patient-img" 
               />
               <div className="tag-makeover">✨ SMILE DESIGN CASE</div>
             </div>
-
+            
             <div className="featured-story-text reveal-right">
               <span>FEATURED PATIENT STORY</span>
               <h2>From Dental Anxiety to a Confident Smile</h2>
@@ -372,7 +462,7 @@ export const Testimonials: React.FC = () => {
                 Priya came in worried about multiple treatments, but after a detailed scan, a gentle treatment plan,
                 and step-by-step explanations, she completed her smile makeover without pain or stress.
               </p>
-
+              
               {/* Timeline */}
               <div className="story-timeline">
                 <div className="timeline-item">
@@ -410,7 +500,7 @@ export const Testimonials: React.FC = () => {
             <h2>Warranty Experience Reviews</h2>
             <p>Patients appreciate the confidence that comes with our documented treatment warranty program.</p>
           </div>
-
+          
           <div className="warranty-reviews-grid-premium">
             {warrantyReviews.map((review, idx) => (
               <article key={review.name} className={`warranty-review-card-premium glass-card reveal-${idx === 0 ? 'left' : 'right'}`}>
@@ -426,18 +516,18 @@ export const Testimonials: React.FC = () => {
         </div>
       </section>
 
-      {/* 8. Written Reviews */}
+      {/* 8. Recent Written Reviews */}
       <section className="written-reviews-section-premium">
         <div className="premium-container">
           <div className="section-header-premium reveal">
             <span>PATIENT FEEDBACK</span>
             <h2>Recent Written Reviews</h2>
           </div>
-
+          
           <div className="reviews-masonry-grid">
             {reviews.map((rev, idx) => (
-              <div
-                key={idx}
+              <div 
+                key={idx} 
                 className="written-review-card glass-card reveal"
                 style={{ animationDelay: `${idx * 150}ms` }}
               >
@@ -457,9 +547,9 @@ export const Testimonials: React.FC = () => {
       </section>
 
       {/* 9. Leave a Review */}
-      <section className="leave-review-section-premium alternate-bg">
+      <section className="leave-review-section-premium mix-gradient-bg">
         <div className="premium-container">
-          <div className="review-form-card glass-card reveal">
+          <div className="review-form-card reveal">
             <h2>Leave a Review</h2>
             <p>Share your treatment experience at Oceanview Dental Studio.</p>
 
@@ -471,7 +561,7 @@ export const Testimonials: React.FC = () => {
 
             <form onSubmit={handleSubmit} className="review-form-premium">
               <div className="form-grid-premium">
-
+                
                 {/* Name Input */}
                 <div className="floating-group">
                   <input
@@ -503,7 +593,7 @@ export const Testimonials: React.FC = () => {
                   <label htmlFor="rev-treatment" className="floating-label select-label">Treatment Received</label>
                 </div>
 
-                {/* Rating Dropdown */}
+                {/* Star Rating Dropdown */}
                 <div className="floating-group active-label">
                   <select
                     id="rev-rating"
@@ -511,11 +601,11 @@ export const Testimonials: React.FC = () => {
                     value={formRating}
                     onChange={(e) => setFormRating(Number(e.target.value))}
                   >
-                    <option value={5}>5 Stars - Outstanding</option>
-                    <option value={4}>4 Stars - Very Good</option>
-                    <option value={3}>3 Stars - Good</option>
-                    <option value={2}>2 Stars - Fair</option>
-                    <option value={1}>1 Star - Poor</option>
+                    <option value={5}>5 Stars ★★★★★ (Outstanding)</option>
+                    <option value={4}>4 Stars ★★★★☆ (Very Good)</option>
+                    <option value={3}>3 Stars ★★★☆☆ (Good)</option>
+                    <option value={2}>2 Stars ★★☆☆☆ (Fair)</option>
+                    <option value={1}>1 Star ★☆☆☆☆ (Poor)</option>
                   </select>
                   <label htmlFor="rev-rating" className="floating-label select-label">Rating</label>
                 </div>
@@ -551,9 +641,9 @@ export const Testimonials: React.FC = () => {
           <h2>Book an Appointment</h2>
           <p>Schedule your consultation and we will help you choose the right treatment path.</p>
           <div className="cta-buttons-row">
-            <button
-              type="button"
-              className="cta-button primary-cta ripple-button"
+            <button 
+              type="button" 
+              className="cta-button primary-cta ripple-button" 
               onClick={() => window.location.hash = '#/enquiry'}
             >
               Book an Appointment
