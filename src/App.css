@@ -1778,6 +1778,24 @@
   }
 
   .values-card {
+    padding: 32px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    box-shadow: var(--shadow);
+    transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+    h3 {
+      font-size: 20px;
+      color: var(--accent-hover);
+      margin-bottom: 12px;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
     ul {
       padding-left: 20px;
       margin: 20px 0 0;
@@ -1825,31 +1843,95 @@
   }
 }
 
-.tabs-scroll-container {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding-bottom: 16px;
+.treatments-navigation {
+  position: sticky;
+  top: 84px;
+  /* Sticky below header which is 84px tall */
+  z-index: 998;
+  background: rgba(248, 251, 250, 0.95);
+  /* matching --bg color with opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 14px 0 !important;
+  border-bottom: 1px solid var(--border);
   margin-bottom: 48px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent) var(--border);
-
-  &::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--border);
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 10px;
-  }
 }
 
+.carousel-container {
+  position: relative;
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 18px;
+  /* Spacing between category pills: 16-20px */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none;
+  /* Hide scrollbar for IE/Edge */
+  padding: 10px 4px;
+  width: 100%;
+  user-select: none;
+  cursor: grab;
+  box-sizing: border-box;
+}
+
+.carousel-track:active {
+  cursor: grabbing;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+  /* Hide scrollbar for Chrome/Safari/Opera */
+}
+
+/* Round Arrow Navigation buttons */
+.carousel-arrow {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  color: var(--accent);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  user-select: none;
+  position: absolute;
+  font-size: 14px;
+}
+
+.carousel-arrow:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-hover);
+}
+
+.carousel-arrow.left {
+  left: -24px;
+}
+
+.carousel-arrow.right {
+  right: -24px;
+}
+
+/* Tab pills styling */
 .tab-btn {
+  flex: 0 0 auto;
   font-family: var(--sans);
   background: #ffffff;
   border: 1px solid var(--border);
@@ -1859,25 +1941,89 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   white-space: nowrap;
   font-weight: 600;
   font-size: 15px;
   box-shadow: var(--shadow);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Smooth 400ms transition */
+  width: fit-content;
+  box-sizing: border-box;
 
-  &:hover,
-  &.active {
-    background: var(--accent);
-    color: #ffffff;
-    border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: rgba(78, 111, 110, 0.25) 0 8px 16px -4px;
+  /* Show responsive number of elements on different screen sizes using flex-basis & min-width */
+  /* Calculation based on max-width 1200px grid:
+     Desktop: show 6-8 categories (approx 12-15% width each)
+     Tablet: show 4-5 categories (approx 18-22% width each)
+     Mobile: show 2-3 categories (approx 30-45% width each)
+  */
+  min-width: 130px;
+}
+
+@media (min-width: 1025px) {
+  .tab-btn {
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .tab-btn {
+    min-width: 130px;
+    padding: 11px 20px;
   }
 
-  .tab-icon {
-    font-size: 18px;
+  .carousel-arrow.left {
+    left: -18px;
   }
+
+  .carousel-arrow.right {
+    right: -18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tab-btn {
+    min-width: 100px;
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  .carousel-container {
+    width: 92%;
+  }
+
+  .carousel-arrow.left {
+    left: -12px;
+  }
+
+  .carousel-arrow.right {
+    right: -12px;
+  }
+}
+
+.tab-btn:hover {
+  transform: scale(1.05);
+  /* gently scale to 1.05 */
+  box-shadow: var(--shadow-hover);
+  /* soft shadow */
+  border-color: var(--accent);
+}
+
+.tab-btn.active {
+  background: #496A69 !important;
+  /* brand color */
+  color: #ffffff !important;
+  /* white text */
+  border-color: #496A69 !important;
+}
+
+.tab-btn.active:hover {
+  transform: scale(1.05);
+}
+
+.tab-icon {
+  font-size: 18px;
 }
 
 .category-header {
@@ -6639,4 +6785,1184 @@
 .team-card:hover,
 .gallery-card:hover {
   box-shadow: 0 20px 48px rgba(78, 111, 110, 0.12) !important;
+}
+
+/* ==========================================================================
+   Testimonials Page Redesign - Premium Luxury Medical Styles
+   ========================================================================== */
+
+.testimonials-page {
+  background: var(--bg);
+}
+
+/* Alternate Background for alternating sections */
+.alternate-bg {
+  background: #F7FAF9 !important;
+}
+
+/* 1. Hero Section */
+.testimonials-hero-premium {
+  position: relative;
+  height: 60vh;
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1600') no-repeat center center/cover;
+  overflow: hidden;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(73, 106, 105, 0.92) 0%, rgba(13, 53, 56, 0.96) 100%);
+  z-index: 1;
+}
+
+.hero-premium-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  width: 90%;
+  color: #ffffff;
+  padding: 20px;
+}
+
+.premium-tag {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--accent-light);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.testimonials-hero-premium h1 {
+  font-family: var(--heading);
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.testimonials-hero-premium p {
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.6;
+  opacity: 0.9;
+  color: #e8f3f1;
+  max-width: 650px;
+  margin: 0 auto 32px auto;
+}
+
+/* 2. Trust Rating Bar Section */
+.overall-rating-section-premium {
+  background: #ffffff;
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.premium-container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.rating-flex-premium {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+
+@media (max-width: 768px) {
+  .rating-flex-premium {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.rating-score-premium {
+  flex: 1;
+}
+
+.rating-score-premium h2 {
+  font-family: var(--heading);
+  font-size: 80px;
+  font-weight: 600;
+  color: var(--text-h);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.rating-score-premium .stars-glowing {
+  font-size: 26px;
+  color: #fbbf24;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+  margin-bottom: 14px;
+}
+
+.rating-score-premium p {
+  font-size: 17px;
+  color: var(--text);
+  margin: 0;
+}
+
+.rating-platforms-premium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  flex: 2;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .rating-platforms-premium {
+    grid-template-columns: 1fr;
+  }
+}
+
+.platform-card-premium {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px !important;
+  background: var(--bg-card);
+  transition: all 0.3s ease;
+}
+
+.platform-card-premium:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+}
+
+.platform-card-premium .platform-icon {
+  font-size: 28px;
+}
+
+.platform-card-premium .platform-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.platform-card-premium .platform-info span {
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.platform-card-premium .platform-info strong {
+  font-size: 17px;
+  color: var(--text-h);
+  margin-top: 4px;
+}
+
+.trust-badges-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  border-top: 1px solid var(--border);
+  padding-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .trust-badges-row {
+    justify-content: center;
+  }
+}
+
+.trust-badge {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-h);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trust-badge .badge-bullet {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+/* 3. Treatment-Based Review Categories Carousel */
+.review-categories-section-premium {
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header-premium {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 56px auto;
+}
+
+.section-header-premium span {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.section-header-premium h2 {
+  font-family: var(--heading);
+  font-size: clamp(30px, 3.5vw, 42px);
+  color: var(--text-h);
+  margin-bottom: 18px;
+  line-height: 1.25;
+}
+
+.section-header-premium p {
+  font-size: 16px;
+  color: var(--text);
+  margin: 0;
+}
+
+.category-cards-grid-premium {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 992px) {
+  .category-cards-grid-premium {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .category-cards-grid-premium {
+    grid-template-columns: 1fr;
+  }
+}
+
+.category-card-premium {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  width: 100%;
+  padding: 32px !important;
+  background: #ffffff;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.category-card-premium:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.category-card-premium:hover .card-bottom-accent {
+  width: 100%;
+}
+
+.category-card-premium .card-top h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 8px;
+}
+
+.category-card-premium .card-top .case-count {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--accent);
+  font-weight: 800;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.category-card-premium p {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.card-bottom-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 4. Video Testimonials */
+.video-testimonials-section-premium {
+  background: #ffffff;
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.video-cards-grid-premium {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+}
+
+@media (max-width: 768px) {
+  .video-cards-grid-premium {
+    grid-template-columns: 1fr;
+  }
+}
+
+.video-luxury-card {
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.video-luxury-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.video-luxury-card:hover .video-thumb-img {
+  transform: scale(1.04);
+}
+
+.video-luxury-card:hover .glowing-play-btn {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(191, 213, 209, 0.7);
+}
+
+.video-thumbnail-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.video-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.video-thumbnail-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 53, 56, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glowing-play-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.glowing-play-btn .play-triangle {
+  color: var(--accent-hover);
+  font-size: 16px;
+  margin-left: 3px;
+}
+
+.duration-pill {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: rgba(13, 53, 56, 0.8);
+  color: #ffffff;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+}
+
+.video-card-body {
+  padding: 24px;
+}
+
+.video-card-body h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 8px;
+}
+
+.video-card-body p {
+  font-size: 14px;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 5. Google Reviews Auto-playing Review Slider */
+.google-reviews-section-premium {
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.google-slider-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 48px !important;
+  background: #ffffff;
+  position: relative;
+  text-align: center;
+  min-height: 250px;
+  box-sizing: border-box;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 600px) {
+  .google-slider-container {
+    padding: 40px 24px !important;
+    min-height: 280px;
+  }
+}
+
+.google-slider-container .g-decor {
+  font-family: var(--heading);
+  font-size: 150px;
+  color: var(--border);
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  opacity: 0.15;
+  user-select: none;
+}
+
+.google-slider-wrapper {
+  position: relative;
+  min-height: 160px;
+}
+
+.google-slide-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-slide-item.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  position: relative;
+}
+
+.google-slide-item .review-stars-glowing {
+  color: #fbbf24;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.slider-review-text {
+  font-size: clamp(16px, 2.5vw, 20px);
+  line-height: 1.6;
+  color: var(--text-h);
+  font-weight: 500;
+  font-style: italic;
+  margin: 0 0 20px 0;
+  max-width: 600px;
+}
+
+.slider-reviewer-name {
+  font-size: 15px;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+
+.google-slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.google-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.google-dot.active {
+  background: var(--accent);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* 6. Featured Patient Story Split Layout with Timeline */
+.featured-story-section-premium {
+  background: #ffffff;
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.featured-grid-premium {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .featured-grid-premium {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.featured-image-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.featured-patient-img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.featured-image-wrapper:hover .featured-patient-img {
+  transform: scale(1.03);
+}
+
+.tag-makeover {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--accent);
+  color: #ffffff;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.featured-story-text span {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.featured-story-text h2 {
+  font-family: var(--heading);
+  font-size: clamp(32px, 4vw, 44px);
+  color: var(--text-h);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.featured-story-text .featured-desc {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 36px;
+}
+
+.story-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.timeline-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent-hover);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.timeline-info h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 4px;
+}
+
+.timeline-info p {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text);
+  margin: 0;
+}
+
+/* 7. Warranty Experience Reviews */
+.warranty-reviews-section-premium {
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.warranty-reviews-grid-premium {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 768px) {
+  .warranty-reviews-grid-premium {
+    grid-template-columns: 1fr;
+  }
+}
+
+.warranty-review-card-premium {
+  padding: 36px !important;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.warranty-review-card-premium:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.warranty-review-card-premium .warranty-card-top .guarantee-shield {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.warranty-review-card-premium .warranty-card-top h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 14px;
+}
+
+.warranty-review-card-premium p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0 0 20px 0;
+  font-style: italic;
+}
+
+.warranty-review-card-premium .warranty-tag-bottom {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+/* 8. Written Reviews Masonry Grid */
+.written-reviews-section-premium {
+  background: #ffffff;
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.reviews-masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+  margin-top: 48px;
+}
+
+@media (max-width: 600px) {
+  .reviews-masonry-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.written-review-card {
+  padding: 32px !important;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.written-review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.written-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.written-card-header strong {
+  font-size: 16px;
+  color: var(--text-h);
+  display: block;
+}
+
+.written-card-header .written-treatment {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 2px;
+  display: block;
+}
+
+.written-card-header .written-date {
+  font-size: 11px;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.written-review-card .review-stars-glowing {
+  color: #fbbf24;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.written-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-h);
+  margin: 0;
+  font-style: italic;
+}
+
+/* 9. Leave a Review Floating Form Section */
+.leave-review-section-premium {
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.review-form-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 48px !important;
+  background: rgba(255, 255, 255, 0.7);
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .review-form-card {
+    padding: 32px 20px !important;
+  }
+}
+
+.review-form-card h2 {
+  font-family: var(--heading);
+  font-size: 32px;
+  color: var(--text-h);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.review-form-card p {
+  font-size: 15px;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.success-message-premium {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.review-form-premium {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-grid-premium {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 600px) {
+  .form-grid-premium {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+/* Floating labels css */
+.floating-group {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.floating-group.text-group {
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.floating-input,
+.floating-select,
+.floating-textarea {
+  width: 100%;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  outline: none;
+  font-size: 15px;
+  color: var(--text-h);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-family: var(--sans);
+}
+
+.floating-input:focus,
+.floating-select:focus,
+.floating-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(78, 111, 110, 0.1);
+}
+
+.floating-textarea {
+  resize: vertical;
+}
+
+.floating-label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  color: var(--text);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+/* When active, scale & shift label up */
+.floating-input:focus~.floating-label,
+.floating-input:not(:placeholder-shown)~.floating-label,
+.floating-textarea:focus~.floating-label,
+.floating-textarea:not(:placeholder-shown)~.floating-label {
+  top: -10px;
+  left: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #ffffff;
+  padding: 2px 8px;
+  color: var(--accent);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* Specific styling adjustments for selects */
+.floating-group.active-label .floating-label.select-label {
+  top: -10px;
+  left: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #ffffff;
+  padding: 2px 8px;
+  color: var(--accent);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* Ripple effect CTA button style overrides */
+.ripple-button {
+  position: relative;
+  overflow: hidden;
+}
+
+/* 10. Book an Appointment (CTA) */
+.testimonials-cta-section {
+  position: relative;
+  padding: 100px 0;
+  text-align: center;
+  background: #0d3538;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+
+.cta-background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&q=80&w=1600') no-repeat center center/cover;
+  opacity: 0.15;
+  z-index: 1;
+}
+
+.cta-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(185deg, rgba(13, 53, 56, 0.95) 0%, rgba(73, 106, 105, 0.85) 100%);
+  z-index: 2;
+}
+
+.cta-content-premium {
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+  width: 90%;
+  margin: 0 auto;
+  color: #ffffff;
+}
+
+.cta-content-premium h2 {
+  font-family: var(--heading);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.cta-content-premium p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #e8f3f1;
+  max-width: 600px;
+  margin: 0 auto 36px auto;
+}
+
+.cta-buttons-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cta-buttons-row .secondary-cta {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cta-buttons-row .secondary-cta:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: scale(1.04);
+}
+
+/* ==========================================================================
+   GLOBAL UI/UX AUDIT ENHANCEMENTS
+   ========================================================================== */
+
+/* 2. Accessibility Controls & Toolbar */
+.a11y-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.a11y-toggle-btn {
+  background: rgba(78, 111, 110, 0.12);
+  border: 1px solid var(--border);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.a11y-toggle-btn:hover {
+  background: var(--accent);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.a11y-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 220px;
+  background: #ffffff;
+  padding: 16px !important;
+  border-radius: 16px;
+  box-shadow: var(--shadow-hover);
+  border: 1px solid var(--border);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.a11y-dropdown h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.a11y-option {
+  padding: 8px 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-h);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.a11y-option.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+/* 3. WCAG Accessibility High-Contrast & Font-Scaling */
+html.high-contrast {
+  filter: contrast(125%);
+}
+
+html.high-contrast body {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+html.high-contrast .glass-card,
+html.high-contrast .category-card-premium,
+html.high-contrast .written-review-card,
+html.high-contrast .platform-card-premium {
+  background: #111111 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+html.font-large {
+  font-size: 118% !important;
+}
+
+/* 4. Keyboard Focus State Ring for Accessibility */
+:focus-visible {
+  outline: 3px solid var(--accent) !important;
+  outline-offset: 2px !important;
+}
+
+/* 5. Back to Top Fade-in */
+.back-to-top {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  background: var(--accent);
+  color: #ffffff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 8px 25px rgba(78, 111, 110, 0.4);
 }

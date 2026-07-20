@@ -7,7 +7,7 @@ import waitingImg1 from '../assets/images/Waiting.jpeg';
 import waitingImg2 from '../assets/images/Waiting 2.jpeg';
 
 export const About: React.FC = () => {
-  // Cinematic Scroll reveal trigger (play only once, threshold 0.22)
+  // Cinematic Scroll reveal trigger (repeats on scroll, threshold 0.22)
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>('.reveal, .reveal-left, .reveal-right');
     if (!('IntersectionObserver' in window)) {
@@ -19,7 +19,8 @@ export const About: React.FC = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('in-view');
         }
       });
     }, { threshold: 0.22 });
@@ -133,7 +134,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* Message from the Dentist */}
-      <section className="dentist-message-banner glass-card reveal">
+      <section className="dentist-message-banner reveal">
         <h2>A Personal Message to Our Patients</h2>
         <blockquote>
           "At Oceanview, we invest in the most advanced dental technologies—from digital microscopes to dental lasers—not because it's trendy, but because it ensures our patients receive the most precise, pain-free, and safe treatments. We treat every patient like family, guaranteeing absolute transparency and premium care."
@@ -171,7 +172,7 @@ export const About: React.FC = () => {
         </div>
         <div className="tour-gallery-grid">
           {clinicTourImages.map((img, idx) => (
-            <div key={idx} className="gallery-card glass-card reveal">
+            <div key={idx} className="gallery-card reveal">
               <img src={img.src} alt={img.label} className="gallery-img" />
               <div className="gallery-card-label">{img.label}</div>
             </div>
@@ -209,23 +210,21 @@ export const About: React.FC = () => {
 
       {/* Core Values & Awards */}
       <section className="awards-values-section reveal">
-        <div className="values-grid">
-          <div className="values-card glass-card">
-            <h3>Our Core Values</h3>
-            <ul>
-              <li>🤝 <strong>Absolute Transparency:</strong> No hidden costs, detailed treatment maps.</li>
-              <li>🛡️ <strong>Safety Integrity:</strong> Strict clinical hygiene protocols.</li>
-              <li>🔬 <strong>Precision Standards:</strong> Tech-supported clinical execution.</li>
-            </ul>
-          </div>
-          <div className="values-card glass-card">
-            <h3>Awards & Recognition</h3>
-            <ul>
-              <li>🏆 <strong>Best Dental Clinic Award:</strong> Excellence in Patient Care.</li>
-              <li>🌟 <strong>ISO 9001:2015 Certification:</strong> Verified Quality Systems.</li>
-              <li>🥇 <strong>Endodontic Pioneer Award:</strong> Micro-dentistry recognition.</li>
-            </ul>
-          </div>
+        <div className="values-card">
+          <h3>Our Core Values</h3>
+          <ul>
+            <li>🤝 <strong>Absolute Transparency:</strong> No hidden costs, detailed treatment maps.</li>
+            <li>🛡️ <strong>Safety Integrity:</strong> Strict clinical hygiene protocols.</li>
+            <li>🔬 <strong>Precision Standards:</strong> Tech-supported clinical execution.</li>
+          </ul>
+        </div>
+        <div className="values-card">
+          <h3>Awards & Recognition</h3>
+          <ul>
+            <li>🏆 <strong>Best Dental Clinic Award:</strong> Excellence in Patient Care.</li>
+            <li>🌟 <strong>ISO 9001:2015 Certification:</strong> Verified Quality Systems.</li>
+            <li>🥇 <strong>Endodontic Pioneer Award:</strong> Micro-dentistry recognition.</li>
+          </ul>
         </div>
       </section>
     </div>

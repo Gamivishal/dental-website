@@ -162,3 +162,22 @@ All page structures, routing, React component configurations, form submissions, 
   - Built a custom `AnimatedCounter` component using `IntersectionObserver` and `requestAnimationFrame` for stats items (`5.0 ★`, `15+ Yrs`, `100%`) to count up dynamically when scrolled into view.
 - **Route Transitions**:
   - Shuffled page-transition fade-ins to load with a **`1.3s`** duration and `cubic-bezier(0.22, 1, 0.36, 1)` rise transition for dynamic hash routing content changes.
+
+### 5. TypeScript & Compiler Fixes
+- **MouseEvent Elements Type Safety**: Changed event signatures of `handleMouseMove` and `handleMouseLeave` inside `Home.tsx` to target `React.MouseEvent<HTMLElement>` (since they attach directly to a `<section>` element rather than a `<div>`), preventing any browser element signature mismatch warnings.
+- **Unused Warning Resolutions**: Removed unused `useState` from the top imports of `Treatments.tsx` and removed the unused `setCurrentPage` prop from destructuring parameters in the `Treatments` functional component declaration.
+
+### 6. Seamless Full-Width Layout & Centering
+- **Full-Bleed Page Shell**: Updated `.page` inside `src/index.css` to take `width: 100%` and `max-width: 100%`, removing any rigid `1200px` limits from page boundaries and enabling background colors to stretch edge-to-edge.
+- **Section Box Card Styling Elimination**: Stripped card margins, borders, box shadows, and rounded borders from `.home-section-alternate-light`, `.home-section-alternate-white`, `.home-stats-bar-premium`, `.home-final-cta-luxury`, `.dentist-message-banner`, `.comparison-section`, `.info-hero-redesign`, and `.contact-hero-premium`.
+- **Inner Content Columns Centering**: Positioned all core visual and content wrappers (e.g. grids, checklists, headings, FAQs, timelines, table wrappers) inside a centered container ruleset with a maximum width of `1200px` and automatic horizontal margins.
+- **Grid Layout Centered Columns**: Programmed custom `grid-template-columns` margin offsets for split hero grids (`.info-hero-redesign`, `.contact-hero-premium`) and multi-column statistic grids (`.home-stats-bar-premium`) to center inner text/visual contents at a max-width without adding unnecessary divs to JSX.
+- **Consistent Section Spacing**: Enforced a uniform vertical spacing of `80px` padding on standard sections (excluding heroes and menus) to ensure a high-end, premium connection across viewport changes.
+
+### 7. Repeating Scroll Reveal Animations
+- **Toggled scroll triggers**: Replaced one-time viewport entries with repeating toggle triggers on all pages (`Home.tsx`, `SmileGallery.tsx`, `PatientInfo.tsx`, `Enquiry.tsx`, `Contact.tsx`, `About.tsx`, `Treatments.tsx`). When elements exit the viewport, their `.in-view` class is automatically removed, causing the animations to re-trigger dynamically every time the user scrolls back to them.
+
+### 8. Treatments Tab Navigation Scroller Optimization
+- **Clipping & Overlap Resolution**: Added vertical safety padding (`10px 4px 20px 4px`) to the tab scroller container. This ensures that when buttons lift (`translateY(-2px)`) and render glowing box-shadows on hover/active states, they are never clipped at the top or bottom of the container boundaries.
+- **Scrollbar Elimination**: Configured browser-specific scrollbar rules (`scrollbar-width: none`, `-ms-overflow-style: none`, and `::-webkit-scrollbar { display: none }`) to hide ugly horizontal scrollbars completely. This transforms the tab navigation row into a clean, swipeable slider track.
+- **Alignment Centering**: Constrained the scrollable container to a `1200px` max-width centered layout to keep it aligned with other pages while maintaining full swipe-to-scroll capabilities on touch viewports.

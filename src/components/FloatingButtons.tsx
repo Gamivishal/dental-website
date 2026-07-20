@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface FloatingButtonsProps {
   setCurrentPage: (page: string) => void;
 }
 
 export const FloatingButtons: React.FC<FloatingButtonsProps> = ({ setCurrentPage }) => {
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowBackToTop(true);
+      } else {
+        setShowBackToTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleNav = (page: string) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -39,14 +54,16 @@ export const FloatingButtons: React.FC<FloatingButtonsProps> = ({ setCurrentPage
       </div>
 
       {/* Back to Top Button */}
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="back-to-top"
-        title="Back to Top"
-        aria-label="Back to Top"
-      >
-        ▲
-      </button>
+      {showBackToTop && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="back-to-top fade-in"
+          title="Back to Top"
+          aria-label="Back to Top"
+        >
+          ▲
+        </button>
+      )}
     </>
   );
 };

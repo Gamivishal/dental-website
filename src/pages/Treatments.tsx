@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export interface TreatmentSub {
   name: string;
@@ -349,7 +349,170 @@ export const Treatments: React.FC<TreatmentsProps> = ({
     setCurrentSubcategory(sub);
   };
 
-  // Cinematic Scroll reveal trigger (play only once, threshold 0.22)
+  // Repeated categories list for infinite looping scrolling
+  const repeatedCategories = [
+    ...treatmentData,
+    ...treatmentData,
+    ...treatmentData,
+  ];
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInitial = useRef(true);
+  const isDown = useRef(false);
+  const startX = useRef(0);
+  const scrollLeftStart = useRef(0);
+  const isHovered = useRef(false);
+  const autoplayTimer = useRef<NodeJS.Timeout | null>(null);
+  const lastClickedIndex = useRef<number | null>(null);
+
+  // Center the active category item in the slider
+  const centerItem = (index: number, smooth = true) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const children = container.children;
+    const targetElement = children[index] as HTMLElement;
+    if (!targetElement) return;
+
+    const containerWidth = container.clientWidth;
+    const elementWidth = targetElement.offsetWidth;
+    const elementLeft = targetElement.offsetLeft;
+
+    const targetScrollLeft = elementLeft - (containerWidth / 2) + (elementWidth / 2);
+
+    container.scrollTo({
+      left: targetScrollLeft,
+      behavior: smooth ? 'smooth' : 'auto',
+    });
+  };
+
+  // Autoplay functionality - scroll slowly every 3-4 seconds
+  const startAutoplay = () => {
+    if (autoplayTimer.current) clearInterval(autoplayTimer.current);
+    autoplayTimer.current = setInterval(() => {
+      if (isHovered.current || isDown.current) return;
+      const container = containerRef.current;
+      if (!container) return;
+
+      const firstChild = container.children[0] as HTMLElement;
+      const scrollStep = firstChild ? firstChild.offsetWidth + 18 : 150; // Spacing is 18px
+      container.scrollBy({ left: scrollStep, behavior: 'smooth' });
+    }, 3500);
+  };
+
+  const stopAutoplay = () => {
+    if (autoplayTimer.current) {
+      clearInterval(autoplayTimer.current);
+      autoplayTimer.current = null;
+    }
+  };
+
+  // Infinite loop scrolling: reset position silently when boundary crossed
+  const handleScroll = () => {
+    const container = containerRef.current;
+    if (!container) return;
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+
+    const segmentWidth = scrollWidth / 3;
+
+    if (scrollLeft < segmentWidth - 150) {
+      container.scrollLeft = scrollLeft + segmentWidth;
+    } else if (scrollLeft > segmentWidth * 2 + 150 - clientWidth) {
+      container.scrollLeft = scrollLeft - segmentWidth;
+    }
+  };
+
+  // Autoplay initialization and wheel horizontal scroll listener
+  useEffect(() => {
+    startAutoplay();
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+      }
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      stopAutoplay();
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
+  // Center active category on change
+  useEffect(() => {
+    const originalIndex = treatmentData.findIndex((c) => c.id === selectedCategory);
+    if (originalIndex !== -1) {
+      const timer = setTimeout(() => {
+        // If clicked explicitly, we've centered it instantly inside handleTabClick
+        if (lastClickedIndex.current !== null) {
+          if (repeatedCategories[lastClickedIndex.current]?.id === selectedCategory) {
+            lastClickedIndex.current = null;
+            return;
+          }
+        }
+        // Otherwise (e.g. initial load or external nav), center the item in the middle segment
+        centerItem(originalIndex + treatmentData.length, !isInitial.current);
+        if (isInitial.current) {
+          isInitial.current = false;
+        }
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedCategory]);
+
+  // Mouse Drag Scroll for Desktop
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const container = containerRef.current;
+    if (!container) return;
+    isDown.current = true;
+    startX.current = e.pageX - container.offsetLeft;
+    scrollLeftStart.current = container.scrollLeft;
+  };
+
+  const handleMouseLeaveOrUp = () => {
+    isDown.current = false;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const container = containerRef.current;
+    if (!isDown.current || !container) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    container.scrollLeft = scrollLeftStart.current - walk;
+  };
+
+  // Click handler for tab pills
+  const handleTabClick = (catId: string, idx: number) => {
+    lastClickedIndex.current = idx;
+    setSelectedCategory(catId);
+    centerItem(idx, true);
+  };
+
+  // Arrow navigation buttons
+  const handleArrowLeft = () => {
+    const container = containerRef.current;
+    if (!container) return;
+    const firstChild = container.children[0] as HTMLElement;
+    const scrollStep = firstChild ? firstChild.offsetWidth + 18 : 150;
+    container.scrollBy({ left: -scrollStep * 2, behavior: 'smooth' });
+  };
+
+  const handleArrowRight = () => {
+    const container = containerRef.current;
+    if (!container) return;
+    const firstChild = container.children[0] as HTMLElement;
+    const scrollStep = firstChild ? firstChild.offsetWidth + 18 : 150;
+    container.scrollBy({ left: scrollStep * 2, behavior: 'smooth' });
+  };
+
+  // Cinematic Scroll reveal trigger (repeats on scroll, threshold 0.22)
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>('.reveal, .reveal-left, .reveal-right');
     if (!('IntersectionObserver' in window)) {
@@ -361,7 +524,8 @@ export const Treatments: React.FC<TreatmentsProps> = ({
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('in-view');
         }
       });
     }, { threshold: 0.22 });
@@ -383,17 +547,45 @@ export const Treatments: React.FC<TreatmentsProps> = ({
 
       {/* Tabs Navigation */}
       <section className="treatments-navigation">
-        <div className="tabs-scroll-container">
-          {treatmentData.map((cat) => (
-            <button
-              key={cat.id}
-              className={`tab-btn ${selectedCategory === cat.id ? 'active' : ''}`}
-              onClick={() => setSelectedCategory(cat.id)}
-            >
-              <span className="tab-icon">{cat.icon}</span>
-              <span className="tab-label">{cat.name}</span>
-            </button>
-          ))}
+        <div className="carousel-container">
+          <button
+            className="carousel-arrow left"
+            onClick={handleArrowLeft}
+            aria-label="Previous categories"
+          >
+            ◀
+          </button>
+
+          <div
+            className="carousel-track"
+            ref={containerRef}
+            onScroll={handleScroll}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeaveOrUp}
+            onMouseUp={handleMouseLeaveOrUp}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => { isHovered.current = true; }}
+            onMouseLeave={() => { isHovered.current = false; }}
+          >
+            {repeatedCategories.map((cat, idx) => (
+              <button
+                key={`${cat.id}-${idx}`}
+                className={`tab-btn ${selectedCategory === cat.id ? 'active' : ''}`}
+                onClick={() => handleTabClick(cat.id, idx)}
+              >
+                <span className="tab-icon">{cat.icon}</span>
+                <span className="tab-label">{cat.name}</span>
+              </button>
+            ))}
+          </div>
+
+          <button
+            className="carousel-arrow right"
+            onClick={handleArrowRight}
+            aria-label="Next categories"
+          >
+            ▶
+          </button>
         </div>
       </section>
 

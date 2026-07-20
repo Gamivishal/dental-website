@@ -23,3 +23,5 @@
 - [x] Verify layout responsiveness
   - [x] Check prefers-reduced-motion safety
   - [x] Ensure 60 FPS rendering using GPU-accelerated transforms
+- [x] Full-bleed layout connectivity & center alignment
+- [x] Treatments page category tab scroller optimization (removed scrollbars, resolved button hover clipping, centered layout track)

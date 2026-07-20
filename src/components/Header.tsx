@@ -55,11 +55,11 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
       <div className="header-container">
         {/* Logo / Brand */}
         <div className="header-logo" onClick={() => handleNav('home')}>
-          <img src={logoImg} alt="Oceanview Dental Studio Logo" className="logo-img" />
+          <img src={logoImg} alt="Oceanview Dental Studio Logo" className="logo-img" loading="lazy" />
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="desktop-nav">
+        <nav className="desktop-nav" aria-label="Main Navigation">
           {menuItems.map((item) => (
             <div
               key={item.id}
@@ -70,6 +70,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
               <button
                 className={`nav-link ${currentPage === item.id ? 'active' : ''}`}
                 onClick={() => !item.hasSub && handleNav(item.id)}
+                aria-expanded={item.hasSub ? megaMenuOpen : undefined}
               >
                 {item.label}
                 {item.hasSub && <span className="chevron-down">▼</span>}
@@ -97,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
 
         {/* Header CTAs */}
         <div className="header-ctas">
-          <button className="cta-button primary-cta" onClick={() => handleNav('enquiry')}>
+          <button className="cta-button primary-cta ripple-button" onClick={() => handleNav('enquiry')}>
             Book Appointment
           </button>
           <a href="tel:9835333333" className="cta-icon-link phone-call" title="Call Us">
@@ -122,6 +123,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
           className={`mobile-toggle ${mobileMenuOpen ? 'open' : ''}`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
         >
           <span className="bar"></span>
           <span className="bar"></span>
@@ -132,7 +134,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
         <div className="mobile-nav-drawer">
-          <nav className="mobile-nav-links">
+          <nav className="mobile-nav-links" aria-label="Mobile Navigation">
             {menuItems.map((item) => (
               <div key={item.id} className="mobile-nav-item">
                 <button
@@ -158,7 +160,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
             ))}
             <div className="mobile-drawer-ctas">
               <button
-                className="cta-button primary-cta w-full"
+                className="cta-button primary-cta w-full ripple-button"
                 onClick={() => handleNav('enquiry')}
               >
                 Book Appointment

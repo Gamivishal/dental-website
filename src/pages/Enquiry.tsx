@@ -47,7 +47,7 @@ export const Enquiry: React.FC = () => {
     }
   };
 
-  // Cinematic Scroll reveal trigger (play only once, threshold 0.22)
+  // Cinematic Scroll reveal trigger (repeats on scroll, threshold 0.22)
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>('.reveal, .reveal-left, .reveal-right');
     if (!('IntersectionObserver' in window)) {
@@ -59,7 +59,8 @@ export const Enquiry: React.FC = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('in-view');
         }
       });
     }, { threshold: 0.22 });
