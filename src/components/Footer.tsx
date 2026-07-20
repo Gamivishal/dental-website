@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage, setSelectedCateg
     <footer className="main-footer">
       <div className="footer-top">
         <div className="footer-grid">
-          {/* Clinic Brand Column */}
+          {/* 1. Clinic Information & Social Media Links */}
           <div className="footer-col brand-col">
             <div className="footer-logo">
               <img src={logoImg} alt="Oceanview Dental Studio Logo" className="footer-logo-img" />
@@ -43,20 +43,20 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage, setSelectedCateg
             </div>
           </div>
 
-          {/* Quick Links Column */}
+          {/* 2. Quick Links */}
           <div className="footer-col">
             <h3>Quick Links</h3>
             <ul>
               <li><button onClick={() => handleNav('home')}>Home</button></li>
-              <li><button onClick={() => handleNav('about')}>About Dr. Shah & Team</button></li>
+              <li><button onClick={() => handleNav('about')}>About Doctor & Team</button></li>
               <li><button onClick={() => handleNav('gallery')}>Smile Gallery</button></li>
               <li><button onClick={() => handleNav('testimonials')}>Patient Stories</button></li>
-              <li><button onClick={() => handleNav('patient-info')}>Patient Guide</button></li>
-              <li><button onClick={() => handleNav('contact')}>Contact & Hours</button></li>
+              <li><button onClick={() => handleNav('contact')}>Contact Us</button></li>
+              <li><button onClick={() => handleNav('enquiry')}>General Enquiry</button></li>
             </ul>
           </div>
 
-          {/* Treatment Column */}
+          {/* 3. Treatment Categories */}
           <div className="footer-col">
             <h3>Treatments</h3>
             <ul>
@@ -64,30 +64,49 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage, setSelectedCateg
               <li><button onClick={() => handleTreatmentNav('cosmetic')}>Cosmetic Makeovers</button></li>
               <li><button onClick={() => handleTreatmentNav('implants')}>Dental Implants</button></li>
               <li><button onClick={() => handleTreatmentNav('rootcanal')}>Root Canal Therapy</button></li>
-              <li><button onClick={() => handleTreatmentNav('orthodontics')}>Clear Aligners & Braces</button></li>
+              <li><button onClick={() => handleTreatmentNav('orthodontics')}>Clear Aligners</button></li>
               <li><button onClick={() => handleTreatmentNav('whitening')}>Teeth Whitening</button></li>
             </ul>
           </div>
 
-          {/* Contact Details & Map Column */}
+          {/* 4. Patient Links */}
+          <div className="footer-col">
+            <h3>Patient Links</h3>
+            <ul>
+              <li><button onClick={() => handleNav('patient-info')}>First Visit Process</button></li>
+              <li><button onClick={() => handleNav('patient-info')}>Payment & Finance Options</button></li>
+              <li><button onClick={() => handleNav('patient-info')}>Patient Comfort Care</button></li>
+              <li><button onClick={() => handleNav('patient-info')}>Emergency Dental Info</button></li>
+              <li><button onClick={() => handleNav('testimonials')}>Leave a Patient Review</button></li>
+            </ul>
+          </div>
+
+          {/* 5. International Patient Links */}
+          <div className="footer-col">
+            <h3>International</h3>
+            <ul>
+              <li><button onClick={() => handleNav('contact')}>Dental Tourism Guide</button></li>
+              <li><button onClick={() => handleNav('enquiry')}>Pre-visit CBCT Evaluation</button></li>
+              <li><button onClick={() => handleNav('contact')}>Airport Pickup Coordinator</button></li>
+              <li><button onClick={() => handleNav('contact')}>Nearby Luxury Lodging</button></li>
+            </ul>
+          </div>
+
+          {/* 6. Contact Details, Timings & Google Map Link */}
           <div className="footer-col contact-col">
-            <h3>Contact Us</h3>
+            <h3>Contact & Timings</h3>
             <p className="contact-item">
               📍 <strong>Location:</strong><br />
               102 Blue Ocean Plaza, Marine Boulevard, Suite B
             </p>
             <p className="contact-item">
-              📞 <strong>Call Us:</strong><br />
-              <a href="tel:+18005550199">+1 800 555 0199</a>
-            </p>
-            <p className="contact-item">
-              📧 <strong>Email Support:</strong><br />
-              <a href="mailto:info@oceanviewdental.com">info@oceanviewdental.com</a>
-            </p>
-            <p className="contact-item">
               ⏰ <strong>Clinic Timings:</strong><br />
               Mon - Sat: 9:00 AM - 8:00 PM<br />
               Sunday: By Appointment Only
+            </p>
+            <p className="contact-item">
+              📞 <strong>Phone:</strong> <a href="tel:+18005550199">+1 800 555 0199</a><br />
+              📧 <strong>Email:</strong> <a href="mailto:info@oceanviewdental.com">info@oceanviewdental.com</a>
             </p>
             <a 
               href="https://maps.google.com" 
@@ -103,15 +122,18 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage, setSelectedCateg
 
       <div className="footer-bottom">
         <div className="footer-bottom-container">
+          {/* 14. Copyright */}
           <p className="copyright-text">
             © {new Date().getFullYear()} Oceanview Dental Studio. All rights reserved.
           </p>
+          {/* 10, 11, 12. Policies */}
           <div className="policy-links">
             <button onClick={() => handleNav('home')}>Privacy Policy</button>
-            <button onClick={() => handleNav('home')}>Terms of Service</button>
+            <button onClick={() => handleNav('home')}>Terms and Conditions</button>
             <button onClick={() => handleNav('home')}>Warranty Policy</button>
           </div>
         </div>
+        {/* 13. Medical Disclaimer */}
         <div className="medical-disclaimer">
           <p>
             <strong>Medical Disclaimer:</strong> The dental and medical information on this site is provided for educational and informational purposes only. It is not intended as a substitute for professional dental diagnosis, treatment, advice, or services.

@@ -38,7 +38,7 @@ export const Contact: React.FC = () => {
                 <p>📍 <strong>Clinic Address:</strong><br />102 Blue Ocean Plaza, Marine Boulevard, Suite B</p>
                 <p>📞 <strong>Phone Support:</strong><br /><a href="tel:+18005550199">+1 800 555 0199</a></p>
                 <p>📧 <strong>Email Support:</strong><br /><a href="mailto:info@oceanviewdental.com">info@oceanviewdental.com</a></p>
-                <p>💬 <strong>WhatsApp Chat:</strong><br /><a href="https://wa.me/15550199">+1 555 0199</a></p>
+                <p>💬 <strong>WhatsApp Chat:</strong><br /><a href="https://wa.me/919510212154">+91 95102 12154</a></p>
               </div>
             </div>
 
@@ -134,7 +134,7 @@ export const Contact: React.FC = () => {
               <div className="or-divider">OR</div>
 
               <div className="quick-chat-ctas">
-                <a href="https://wa.me/15550199" target="_blank" rel="noopener noreferrer" className="quick-btn whatsapp">
+                <a href="https://wa.me/919510212154" target="_blank" rel="noopener noreferrer" className="quick-btn whatsapp">
                   💬 Chat on WhatsApp
                 </a>
                 <a href="tel:+18005550199" className="quick-btn phone">
