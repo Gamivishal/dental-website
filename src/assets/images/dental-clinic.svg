@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#0f374a"/>
+      <stop offset="100%" stop-color="#082f49"/>
+    </linearGradient>
+
+    <!-- Glassmorphism Gradient -->
+    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+
+    <!-- Border Gradient -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#0ea5e9" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <!-- Tooth Core Gradient -->
+    <linearGradient id="toothGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#f0fdfa"/>
+      <stop offset="100%" stop-color="#ccfbf1"/>
+    </linearGradient>
+
+    <!-- Cyan Glow -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="30" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Sparkle Shader -->
+    <radialGradient id="sparkleGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#38bdf8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+
+  <!-- Decorative Background Elements -->
+  <circle cx="150" cy="150" r="250" fill="#06b6d4" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="700" cy="450" r="200" fill="#0ea5e9" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="400" cy="300" r="120" fill="#0891b2" opacity="0.05" filter="url(#glow)"/>
+
+  <!-- Grid Pattern overlay -->
+  <g opacity="0.03">
+    <path d="M 0,50 L 800,50 M 0,100 L 800,100 M 0,150 L 800,150 M 0,200 L 800,200 M 0,250 L 800,250 M 0,300 L 800,300 M 0,350 L 800,350 M 0,400 L 800,400 M 0,450 L 800,450 M 0,500 L 800,500 M 0,555 L 800,555" stroke="#ffffff" stroke-width="1"/>
+    <path d="M 50,0 L 50,600 M 100,0 L 100,600 M 150,0 L 150,600 M 200,0 L 200,600 M 250,0 L 250,600 M 300,0 L 300,600 M 350,0 L 350,600 M 400,0 L 400,600 M 450,0 L 450,600 M 500,0 L 500,600 M 550,0 L 550,600 M 600,0 L 600,600 M 650,0 L 650,600 M 700,0 L 700,600 M 750,0 L 750,600" stroke="#ffffff" stroke-width="1"/>
+  </g>
+
+  <!-- Central Glassmorphism Card -->
+  <rect x="180" y="80" width="440" height="440" rx="30" fill="url(#glassGrad)" stroke="url(#borderGrad)" stroke-width="1.5" backdrop-filter="blur(20px)"/>
+
+  <!-- Dental Icon / Shield Motif Background -->
+  <path d="M 400 130 C 470 130 520 170 520 250 C 520 370 400 450 400 450 C 400 450 280 370 280 250 C 280 170 330 130 400 130 Z" fill="#0e7490" opacity="0.1" stroke="#22d3ee" stroke-width="1" stroke-dasharray="8 4"/>
+
+  <!-- Tooth Art (Modern Clean Vector) -->
+  <g transform="translate(0, 10)">
+    <!-- Shadow -->
+    <path d="M 330 380 C 370 410 400 420 400 420 C 400 420 430 410 470 380 C 510 350 500 240 500 210 C 500 180 480 160 450 160 C 420 160 405 180 400 185 C 395 180 380 160 350 160 C 320 160 300 180 300 210 C 300 240 290 350 330 380 Z" fill="#000000" opacity="0.25" filter="url(#glow)"/>
+
+    <!-- Tooth Base Body -->
+    <path d="M 330 380 C 370 410 400 420 400 420 C 400 420 430 410 470 380 C 510 350 500 240 500 210 C 500 180 480 160 450 160 C 420 160 405 180 400 185 C 395 180 380 160 350 160 C 320 160 300 180 300 210 C 300 240 290 350 330 380 Z" fill="url(#toothGrad)"/>
+
+    <!-- Tooth Inner Highlights (Adds 3D feel) -->
+    <path d="M 320 210 C 320 190 335 175 355 175 C 365 175 375 180 382 190" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity="0.9"/>
+    <path d="M 480 210 C 480 190 465 175 445 175 C 435 175 425 180 418 190" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Left Root Detail -->
+    <path d="M 330 380 C 345 350 350 300 350 250" fill="none" stroke="#ccfbf1" stroke-width="3" opacity="0.5"/>
+    
+    <!-- Right Root Detail -->
+    <path d="M 470 380 C 455 350 450 300 450 250" fill="none" stroke="#ccfbf1" stroke-width="3" opacity="0.5"/>
+
+    <!-- Gentle Smile/Sparkle line across the tooth -->
+    <path d="M 340 280 Q 400 310 460 280" fill="none" stroke="#2dd4bf" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+  </g>
+
+  <!-- Sparkles/Stars (Dental Shine) -->
+  <!-- Top Right Sparkle -->
+  <g transform="translate(490, 150)">
+    <ellipse cx="0" cy="0" rx="25" ry="6" fill="url(#sparkleGrad)" transform="rotate(45)"/>
+    <ellipse cx="0" cy="0" rx="25" ry="6" fill="url(#sparkleGrad)" transform="rotate(-45)"/>
+    <circle cx="0" cy="0" r="3" fill="#ffffff"/>
+  </g>
+  
+  <!-- Left Small Sparkle -->
+  <g transform="translate(290, 260) scale(0.6)">
+    <ellipse cx="0" cy="0" rx="25" ry="6" fill="url(#sparkleGrad)" transform="rotate(15)"/>
+    <ellipse cx="0" cy="0" rx="25" ry="6" fill="url(#sparkleGrad)" transform="rotate(-75)"/>
+    <circle cx="0" cy="0" r="3" fill="#ffffff"/>
+  </g>
+
+  <!-- Clean Dentistry Logo/Text on Card -->
+  <text x="400" y="470" text-anchor="middle" font-family="'Outfit', 'Inter', sans-serif" font-size="22" font-weight="700" fill="#e0f2fe" letter-spacing="4">
+    OCEANVIEW DENTAL
+  </text>
+  <text x="400" y="495" text-anchor="middle" font-family="'Outfit', 'Inter', sans-serif" font-size="12" font-weight="500" fill="#06b6d4" letter-spacing="6">
+    PREMIUM DENTAL CARE
+  </text>
+</svg>
