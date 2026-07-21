@@ -3480,7 +3480,7 @@
     margin-bottom: 24px;
 
     .footer-logo-img {
-      height: 44px !important;
+      height: 65px !important;
       width: auto;
       object-fit: contain;
     }
@@ -8482,8 +8482,9 @@ html.font-large {
 /* Responsiveness */
 @media (max-width: 768px) {
   .inner-page-hero-premium {
-    height: 380px;
+    height: 460px;
     margin-bottom: 40px;
+    padding: 0 16px;
   }
 
   .inner-hero-title {
@@ -8941,4 +8942,14 @@ form p,
     max-width: 100% !important;
     width: 100%;
   }
+}
+
+/* Text Justification for Patient Info sections */
+.welcome-text p,
+.step-content p,
+.prep-step-row span,
+.aftercare-checklist-horizontal li,
+.emerg-text p,
+.cta-left p {
+  text-align: justify;
 }
