@@ -72,13 +72,18 @@ function App() {
   // Read cookie preference from localStorage
   useEffect(() => {
     const consent = localStorage.getItem('oceanview-cookie-consent');
-    if (consent === 'true') {
+    if (consent === 'true' || consent === 'ignored') {
       setCookieConsent(true);
     }
   }, []);
 
   const acceptCookies = () => {
     localStorage.setItem('oceanview-cookie-consent', 'true');
+    setCookieConsent(true);
+  };
+
+  const ignoreCookies = () => {
+    localStorage.setItem('oceanview-cookie-consent', 'ignored');
     setCookieConsent(true);
   };
 
@@ -153,9 +158,14 @@ function App() {
           <p>
             We use diagnostic cookies to ensure you get the best browsing experience on our dental clinic site. By continuing, you agree to our privacy conditions.
           </p>
-          <button className="cta-button primary-cta" onClick={acceptCookies}>
-            Accept & Proceed
-          </button>
+          <div className="cookie-buttons">
+            <button className="cta-button primary-cta" onClick={acceptCookies}>
+              Accept
+            </button>
+            <button className="cta-button secondary-cta" onClick={ignoreCookies}>
+              Ignore
+            </button>
+          </div>
         </div>
       )}
 
