@@ -362,7 +362,7 @@ export const Treatments: React.FC<TreatmentsProps> = ({
   const startX = useRef(0);
   const scrollLeftStart = useRef(0);
   const isHovered = useRef(false);
-  const autoplayTimer = useRef<NodeJS.Timeout | null>(null);
+  const autoplayTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const lastClickedIndex = useRef<number | null>(null);
 
   // Center the active category item in the slider
@@ -561,11 +561,13 @@ export const Treatments: React.FC<TreatmentsProps> = ({
             ref={containerRef}
             onScroll={handleScroll}
             onMouseDown={handleMouseDown}
-            onMouseLeave={handleMouseLeaveOrUp}
+            onMouseLeave={() => {
+              handleMouseLeaveOrUp();
+              isHovered.current = false;
+            }}
             onMouseUp={handleMouseLeaveOrUp}
             onMouseMove={handleMouseMove}
             onMouseEnter={() => { isHovered.current = true; }}
-            onMouseLeave={() => { isHovered.current = false; }}
           >
             {repeatedCategories.map((cat, idx) => (
               <button
