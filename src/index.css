@@ -16,6 +16,8 @@
   --accent-light: #A7C8C3;
   --success: #6BAA75;
   --white: #FFFFFF;
+  --accent-gold: #cda851;
+  --accent-gold-hover: #b59242;
 
   /* Header Specific Tokens */
   --header-bg: #FFFFFF;
@@ -57,7 +59,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Custom Scrollbar for Firefox */
-  scrollbar-color: #cda851 #0d3538;
+  scrollbar-color: var(--accent-gold) #0d3538;
   scrollbar-width: thin;
 }
 
@@ -74,13 +76,13 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #cda851;
+  background-color: var(--accent-gold);
   border-radius: 999px;
   border: 2px solid #0d3538;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: #b59242;
+  background-color: var(--accent-gold-hover);
 }
 
 body {
@@ -325,7 +327,7 @@ a {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: var(--accent);
+    color: var(--accent-gold);
     text-transform: uppercase;
     display: block;
     margin-bottom: 12px;
