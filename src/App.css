@@ -8833,3 +8833,97 @@ form p,
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+/* --- GLOBAL MOBILE RESPONSIVENESS FIXES --- */
+@media (max-width: 768px) {
+  /* 1. Ensure the main page container has full width and proper inner padding */
+  .page {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. Eliminate negative margins on sections causing left/right clipping */
+  .home-section-alternate-light,
+  .home-section-alternate-white,
+  .contact-section-light,
+  .contact-section-white {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    border-radius: 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 3. Ensure media elements do not break container boundaries */
+  img:not(.logo-img), video, canvas, iframe {
+    max-width: 100% !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 4. Ensure typography wraps correctly and does not overflow horizontally */
+  h1, h2, h3, h4, h5, h6, p, a, span, li, blockquote {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* 5. Prevent grids from causing overflow if they have negative margins */
+  .split-info-visuals-grid,
+  .contact-details-grid,
+  .warranty-grid,
+  .quick-actions-grid,
+  .gallery-highlights-grid,
+  .journey-grid,
+  .testimonial-preview-grid,
+  .treatments-preview-grid,
+  .trust-bar,
+  .glass-card,
+  .warranty-card,
+  .quick-action-card,
+  .gallery-highlight-card,
+  .journey-step,
+  .testimonial-preview-card {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+  }
+
+  /* 6. Fix full-bleed 100vw hack elements causing horizontal scroll */
+  .hero-slider-section {
+    width: 100% !important;
+    left: auto !important;
+    right: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Break out of .page padding for inner heroes without using 100vw */
+  .inner-page-hero-premium {
+    width: calc(100% + 32px) !important;
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    left: auto !important;
+    right: auto !important;
+    max-width: calc(100% + 32px) !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 7. Ensure fixed overlay doesn't exceed 100% width */
+  .treatment-modal-overlay {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* 8. Global safety for horizontal overflow */
+  body, html {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    width: 100%;
+  }
+}
