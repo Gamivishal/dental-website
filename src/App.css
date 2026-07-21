@@ -260,20 +260,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--bg-section);
     color: var(--accent);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-sizing: border-box;
-    font-size: 16px;
+    transition: transform 0.2s ease;
+    font-size: 20px;
 
     &:hover {
       transform: scale(1.08);
-      background: var(--accent);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(78, 111, 110, 0.2);
     }
   }
 
