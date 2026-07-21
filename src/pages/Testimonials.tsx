@@ -160,7 +160,7 @@ export const Testimonials: React.FC = () => {
       id: 'implant',
       title: 'How Dental Implants Work',
       description: 'An educational guide showing how modern dental implants restore missing teeth with a natural-looking crown.',
-      thumbnail: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=600',
+      thumbnail: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&q=80&w=600',
       duration: '0:45',
       videoUrl: aiVideo,
       revealClass: 'reveal-right'

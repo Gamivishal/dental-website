@@ -7193,6 +7193,11 @@
   color: var(--accent-hover);
   font-size: 16px;
   margin-left: 3px;
+  transition: color 0.3s ease;
+}
+
+.video-luxury-card:hover .play-triangle {
+  color: var(--accent-hover) !important;
 }
 
 .duration-pill {
