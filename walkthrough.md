@@ -181,3 +181,15 @@ All page structures, routing, React component configurations, form submissions, 
 - **Clipping & Overlap Resolution**: Added vertical safety padding (`10px 4px 20px 4px`) to the tab scroller container. This ensures that when buttons lift (`translateY(-2px)`) and render glowing box-shadows on hover/active states, they are never clipped at the top or bottom of the container boundaries.
 - **Scrollbar Elimination**: Configured browser-specific scrollbar rules (`scrollbar-width: none`, `-ms-overflow-style: none`, and `::-webkit-scrollbar { display: none }`) to hide ugly horizontal scrollbars completely. This transforms the tab navigation row into a clean, swipeable slider track.
 - **Alignment Centering**: Constrained the scrollable container to a `1200px` max-width centered layout to keep it aligned with other pages while maintaining full swipe-to-scroll capabilities on touch viewports.
+
+### 9. Static Layout for Review Categories (Testimonials Page)
+- **Slider/Carousel Removal**: Removed the categories carousel navigation buttons (`◀`/`▶`), horizontal touch/wheel scroll listener, and React `categoriesRef` state logic from [Testimonials.tsx](file:///c:/Users/Admin/source/repos/dental-website/src/pages/Testimonials.tsx).
+- **Responsive Static Grid Layout**: Structured the review categories list into a clean static CSS Grid (`.categories-grid-layout`) in [App.css](file:///c:/Users/Admin/source/repos/dental-website/src/App.css), displaying three columns on desktop, two columns on tablet, and a single column on mobile.
+- **Card Responsiveness**: Updated the `.category-card-premium` class styles to fill the grid cell widths dynamically (`width: 100%` and no `flex-shrink`) for a clean, stable layout.
+
+### 10. Dynamic Video Testimonials Support (YouTube, Vimeo, Google Drive, MP4)
+- **Auto-Parsing Helper**: Added `getEmbedUrl` inside [Testimonials.tsx](file:///c:/Users/Admin/source/repos/dental-website/src/pages/Testimonials.tsx) which automatically detects YouTube URLs (standard, shortened, and Shorts), Vimeo links, and Google Drive sharing links (`drive.google.com/file/d/ID/view`) and converts them into direct player embed codes.
+- **Dual Player Engine**: Programmed the player wrapper to dynamically toggle between a standard HTML5 `<video>` tag (for direct MP4 files) and a responsive `<iframe>` embed container depending on the video's address format.
+- **Array-Driven Testimonials Grid**: Refactored the Patient Story highlights section to render cards from a static configuration array (`videoTestimonials`), enabling the user to change titles, descriptions, and video links easily in one place.
+
+
