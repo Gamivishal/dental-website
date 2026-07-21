@@ -1,5 +1,5 @@
 import React from 'react';
-import logoImg from '../assets/images/Logo.jpeg';
+import logoImg from '../assets/images/Logo2.png';
 
 interface FooterProps {
   setCurrentPage: (page: string) => void;
@@ -26,10 +26,10 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage, setSelectedCateg
           {/* 1. Clinic Information & Social Media Links */}
           <div className="footer-col brand-col">
             <div className="footer-logo">
-              <img src={logoImg} alt="Oceanview Dental Studio Logo" className="footer-logo-img" />
-              <div>
-                <h3 className="brand-name">OCEANVIEW</h3>
-                <p className="brand-sub">DENTAL STUDIO</p>
+              <img src={logoImg} alt="Dr. Sheekha Shah Logo" className="footer-logo-img" />
+              <div className="logo-text-branding footer-branding">
+                <span className="logo-title">Dr. Sheekha Shah</span>
+                <span className="logo-subtitle">DENTAL STUDIO</span>
               </div>
             </div>
             <p className="clinic-bio">

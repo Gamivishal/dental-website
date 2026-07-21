@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { InnerHero } from '../components/InnerHero';
+import waitingImg2 from '../assets/images/Waiting 2.jpeg';
 
 export const Contact: React.FC = () => {
   const [bookingName, setBookingName] = useState('');
@@ -42,21 +44,13 @@ export const Contact: React.FC = () => {
     <div className="page contact-page fade-in">
       
       {/* 1. Premium Hero Section */}
-      <section className="contact-hero-premium reveal">
-        <div className="hero-left-content">
-          <span className="hero-badge">GET IN TOUCH</span>
-          <h1>Luxury Clinic Consultations</h1>
-          <p>We are ready to respond to your queries. Drop by our studio or schedule a diagnostic checkup.</p>
-        </div>
-        <div className="hero-right-illustration">
-          <svg className="floating-shapes" width="160" height="160" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="40" fill="rgba(78, 111, 110, 0.05)" />
-            <circle cx="50" cy="50" r="28" fill="rgba(78, 111, 110, 0.08)" />
-            <path d="M50 20 L50 80" stroke="#4e6f6e" strokeWidth="2" strokeDasharray="4 4" />
-            <path d="M20 50 L80 50" stroke="#4e6f6e" strokeWidth="2" strokeDasharray="4 4" />
-          </svg>
-        </div>
-      </section>
+      <InnerHero
+        pageTitle="Luxury Clinic Consultations"
+        badgeText="GET IN TOUCH"
+        subtitle="We are ready to respond to your queries. Drop by our studio or schedule a diagnostic checkup."
+        currentPageName="Contact"
+        bgImage={waitingImg2}
+      />
 
       {/* Alternating Light Sage background Section: Details & Hours */}
       <div className="contact-section-light reveal">

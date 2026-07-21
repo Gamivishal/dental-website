@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { treatmentData } from './Treatments';
+import { InnerHero } from '../components/InnerHero';
+import entryImg from '../assets/images/Entry.jpeg';
 
 export const Enquiry: React.FC = () => {
   const [name, setName] = useState('');
@@ -72,13 +74,13 @@ export const Enquiry: React.FC = () => {
   return (
     <div className="page enquiry-page fade-in">
       {/* Enquiry Hero */}
-      <section className="enquiry-hero">
-        <div className="hero-overlay">
-          <span>GENERAL DENTAL ENQUIRY</span>
-          <h1>Comprehensive Consultation Form</h1>
-          <p>Submit your dental scans, query categories, and medical conditions for evaluation by Dr. Shah.</p>
-        </div>
-      </section>
+      <InnerHero
+        pageTitle="Comprehensive Consultation Form"
+        badgeText="GENERAL DENTAL ENQUIRY"
+        subtitle="Submit your dental scans, query categories, and medical conditions for evaluation by Dr. Shah."
+        currentPageName="Enquiry"
+        bgImage={entryImg}
+      />
 
       {/* Main Layout containing Form Column and Quick Assist Column */}
       <div className="enquiry-layout-wrapper">

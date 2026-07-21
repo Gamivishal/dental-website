@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { InnerHero } from '../components/InnerHero';
+import waitingImg2 from '../assets/images/Waiting 2.jpeg';
 
 interface PatientInfoProps {
   setCurrentPage: (page: string) => void;
@@ -46,36 +48,20 @@ export const PatientInfo: React.FC<PatientInfoProps> = ({ setCurrentPage }) => {
     <div className="page patient-info-page fade-in">
       
       {/* 1. Hero Section */}
-      <section className="info-hero-redesign reveal">
-        <div className="hero-left-content">
-          <span className="badge-premium">PREPARATION GUIDE</span>
-          <h1>Everything You Need for a Confident First Visit</h1>
-          <p>Review the process, prepare for your appointment, and download the forms you need before arriving.</p>
-          <div className="hero-actions">
-            <button className="cta-button primary-cta" onClick={() => setCurrentPage('enquiry')}>
-              Book First Visit
-            </button>
-            <button className="cta-button secondary-cta" onClick={() => setCurrentPage('contact')}>
-              Get Emergency Guide
-            </button>
-          </div>
-        </div>
-        <div className="hero-right-illustration">
-          <svg className="floating-element" width="280" height="280" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Background elements */}
-            <circle cx="100" cy="100" r="80" fill="rgba(78, 111, 110, 0.06)" />
-            <circle cx="100" cy="100" r="60" fill="rgba(78, 111, 110, 0.08)" />
-            {/* Abstract Premium Dental Emblem */}
-            <path d="M100 40 C75 40 60 70 60 100 C60 140 100 170 100 170 C100 170 140 140 140 100 C140 70 125 40 100 40 Z" fill="none" stroke="#4e6f6e" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M100 65 C85 65 75 80 75 100 C75 125 100 145 100 145 C100 145 125 125 125 100 C125 80 115 65 100 65 Z" fill="none" stroke="#6f908d" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx="100" cy="100" r="10" fill="#a7c8c3" />
-            <path d="M100 20 L100 30" stroke="#4e6f6e" strokeWidth="3" strokeLinecap="round"/>
-            <path d="M100 170 L100 180" stroke="#4e6f6e" strokeWidth="3" strokeLinecap="round"/>
-            <path d="M20 100 L30 100" stroke="#4e6f6e" strokeWidth="3" strokeLinecap="round"/>
-            <path d="M170 100 L180 100" stroke="#4e6f6e" strokeWidth="3" strokeLinecap="round"/>
-          </svg>
-        </div>
-      </section>
+      <InnerHero
+        pageTitle="A Calm, Confident First Visit"
+        badgeText="PATIENT INFORMATION"
+        subtitle="Everything you need to know before your appointment before visiting our clinic."
+        currentPageName="Patient Info"
+        bgImage={waitingImg2}
+      >
+        <button className="cta-button primary-cta" onClick={() => setCurrentPage('enquiry')}>
+          Book First Visit
+        </button>
+        <button className="cta-button secondary-cta" onClick={() => setCurrentPage('contact')}>
+          Get Emergency Guide
+        </button>
+      </InnerHero>
 
       {/* 2. Welcome Section */}
       <section className="welcome-section-callout reveal-left">

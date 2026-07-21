@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { InnerHero } from '../components/InnerHero';
+import entryImg from '../assets/images/Entry.jpeg';
 
 // Before & After Interactive Slider Component
 const BeforeAfterSlider: React.FC<{ title: string; category: string; desc?: string; beforeSvg: string; afterSvg: string }> = ({
@@ -472,13 +474,13 @@ export const SmileGallery: React.FC = () => {
   return (
     <div className="page smile-gallery-page fade-in">
       {/* 1. Gallery Hero */}
-      <section className="gallery-hero">
-        <div className="hero-overlay">
-          <span>PATIENT SMILE GALLERY</span>
-          <h1>Interactive Transformations</h1>
-          <p>Explore real-life outcomes from our clinic procedures. Drag the slider to compare before and after results.</p>
-        </div>
-      </section>
+      <InnerHero
+        pageTitle="Interactive Transformations"
+        badgeText="PATIENT SMILE GALLERY"
+        subtitle="Explore real-life outcomes from our clinic procedures. Drag the slider to compare before and after results."
+        currentPageName="Smile Gallery"
+        bgImage={entryImg}
+      />
 
       {/* 2. Before-and-After Sliders Grid */}
       <section className="sliders-grid-section">
@@ -700,7 +702,15 @@ export const SmileGallery: React.FC = () => {
         <div className="cta-content">
           <h2>Start Your Smile Transformation</h2>
           <p>Book a diagnostic scan session with Dr. Sheekha Shah to see what treatment map is right for your smile goals.</p>
-          <a href="#/enquiry" className="cta-button primary-cta">Book Consultation Appointment</a>
+          <button 
+            className="cta-button primary-cta"
+            onClick={() => {
+              window.history.pushState({}, '', '/enquiry');
+              window.dispatchEvent(new PopStateEvent('popstate'));
+            }}
+          >
+            Book Consultation Appointment
+          </button>
         </div>
       </section>
     </div>

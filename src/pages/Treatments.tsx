@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import { InnerHero } from '../components/InnerHero';
+import clinicImg from '../assets/images/Clinic.jpeg';
 
 export interface TreatmentSub {
   name: string;
@@ -349,21 +351,11 @@ export const Treatments: React.FC<TreatmentsProps> = ({
     setCurrentSubcategory(sub);
   };
 
-  // Repeated categories list for infinite looping scrolling
-  const repeatedCategories = [
-    ...treatmentData,
-    ...treatmentData,
-    ...treatmentData,
-  ];
-
   const containerRef = useRef<HTMLDivElement>(null);
   const isInitial = useRef(true);
   const isDown = useRef(false);
   const startX = useRef(0);
   const scrollLeftStart = useRef(0);
-  const isHovered = useRef(false);
-  const autoplayTimer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const lastClickedIndex = useRef<number | null>(null);
 
   // Center the active category item in the slider
   const centerItem = (index: number, smooth = true) => {
@@ -386,46 +378,8 @@ export const Treatments: React.FC<TreatmentsProps> = ({
     });
   };
 
-  // Autoplay functionality - scroll slowly every 3-4 seconds
-  const startAutoplay = () => {
-    if (autoplayTimer.current) clearInterval(autoplayTimer.current);
-    autoplayTimer.current = setInterval(() => {
-      if (isHovered.current || isDown.current) return;
-      const container = containerRef.current;
-      if (!container) return;
-
-      const firstChild = container.children[0] as HTMLElement;
-      const scrollStep = firstChild ? firstChild.offsetWidth + 18 : 150; // Spacing is 18px
-      container.scrollBy({ left: scrollStep, behavior: 'smooth' });
-    }, 3500);
-  };
-
-  const stopAutoplay = () => {
-    if (autoplayTimer.current) {
-      clearInterval(autoplayTimer.current);
-      autoplayTimer.current = null;
-    }
-  };
-
-  // Infinite loop scrolling: reset position silently when boundary crossed
-  const handleScroll = () => {
-    const container = containerRef.current;
-    if (!container) return;
-    const { scrollLeft, scrollWidth, clientWidth } = container;
-
-    const segmentWidth = scrollWidth / 3;
-
-    if (scrollLeft < segmentWidth - 150) {
-      container.scrollLeft = scrollLeft + segmentWidth;
-    } else if (scrollLeft > segmentWidth * 2 + 150 - clientWidth) {
-      container.scrollLeft = scrollLeft - segmentWidth;
-    }
-  };
-
-  // Autoplay initialization and wheel horizontal scroll listener
+  // Wheel horizontal scroll listener
   useEffect(() => {
-    startAutoplay();
-
     const container = containerRef.current;
     if (!container) return;
 
@@ -439,7 +393,6 @@ export const Treatments: React.FC<TreatmentsProps> = ({
     container.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
-      stopAutoplay();
       container.removeEventListener('wheel', handleWheel);
     };
   }, []);
@@ -449,15 +402,7 @@ export const Treatments: React.FC<TreatmentsProps> = ({
     const originalIndex = treatmentData.findIndex((c) => c.id === selectedCategory);
     if (originalIndex !== -1) {
       const timer = setTimeout(() => {
-        // If clicked explicitly, we've centered it instantly inside handleTabClick
-        if (lastClickedIndex.current !== null) {
-          if (repeatedCategories[lastClickedIndex.current]?.id === selectedCategory) {
-            lastClickedIndex.current = null;
-            return;
-          }
-        }
-        // Otherwise (e.g. initial load or external nav), center the item in the middle segment
-        centerItem(originalIndex + treatmentData.length, !isInitial.current);
+        centerItem(originalIndex, !isInitial.current);
         if (isInitial.current) {
           isInitial.current = false;
         }
@@ -490,7 +435,6 @@ export const Treatments: React.FC<TreatmentsProps> = ({
 
   // Click handler for tab pills
   const handleTabClick = (catId: string, idx: number) => {
-    lastClickedIndex.current = idx;
     setSelectedCategory(catId);
     centerItem(idx, true);
   };
@@ -537,13 +481,13 @@ export const Treatments: React.FC<TreatmentsProps> = ({
   return (
     <div className="page treatments-page fade-in">
       {/* Hero */}
-      <section className="treatments-hero">
-        <div className="hero-overlay">
-          <span>TREATMENTS WE PROVIDE</span>
-          <h1>Modern Dental Care Services</h1>
-          <p>Explore our 12 service categories designed to provide clinical safety, efficiency, and lifelong results.</p>
-        </div>
-      </section>
+      <InnerHero
+        pageTitle="State-of-the-Art Treatments"
+        badgeText="PREMIUM DENTAL SERVICES"
+        subtitle="Explore our range of general, cosmetic, and restorative dentistry procedures."
+        currentPageName="Treatments"
+        bgImage={clinicImg}
+      />
 
       {/* Tabs Navigation */}
       <section className="treatments-navigation">
@@ -559,19 +503,14 @@ export const Treatments: React.FC<TreatmentsProps> = ({
           <div
             className="carousel-track"
             ref={containerRef}
-            onScroll={handleScroll}
             onMouseDown={handleMouseDown}
-            onMouseLeave={() => {
-              handleMouseLeaveOrUp();
-              isHovered.current = false;
-            }}
+            onMouseLeave={handleMouseLeaveOrUp}
             onMouseUp={handleMouseLeaveOrUp}
             onMouseMove={handleMouseMove}
-            onMouseEnter={() => { isHovered.current = true; }}
           >
-            {repeatedCategories.map((cat, idx) => (
+            {treatmentData.map((cat, idx) => (
               <button
-                key={`${cat.id}-${idx}`}
+                key={cat.id}
                 className={`tab-btn ${selectedCategory === cat.id ? 'active' : ''}`}
                 onClick={() => handleTabClick(cat.id, idx)}
               >
@@ -608,7 +547,7 @@ export const Treatments: React.FC<TreatmentsProps> = ({
                 <span>⏱️ Duration: {sub.duration}</span>
                 <span>🏥 Recovery: {sub.recovery}</span>
               </div>
-              <button className="view-detail-btn">View Detailed Procedure →</button>
+              <button className="view-detail-btn">Quick Overview</button>
             </div>
           ))}
         </div>

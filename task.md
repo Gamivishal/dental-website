@@ -1,27 +1,14 @@
-# Task Checklist: Site-Wide Premium Cinematic Scroll Animations
+# Task Checklist: Premium Inner Page Hero Redesign
 
-- [x] Configure IntersectionObserver triggers in pages
-  - [x] Home Page (`src/pages/Home.tsx`): Set viewport threshold to 0.22, play only once, add mouse parallax and count-up counters
-  - [x] Smile Gallery Page (`src/pages/SmileGallery.tsx`): Set viewport threshold to 0.22, play only once
-  - [x] Patient Info Page (`src/pages/PatientInfo.tsx`): Set viewport threshold to 0.22, play only once
-  - [x] Enquiry Page (`src/pages/Enquiry.tsx`): Set viewport threshold to 0.22, play only once
-  - [x] Contact Page (`src/pages/Contact.tsx`): Set viewport threshold to 0.22, play only once
-  - [x] About Page (`src/pages/About.tsx`): Register new scroll reveal trigger, set viewport threshold to 0.22, add reveal classes
-  - [x] Treatments Page (`src/pages/Treatments.tsx`): Register tab-aware scroll reveal trigger, set viewport threshold to 0.22, add reveal classes
-- [x] Implement Global Layout Animations in `src/App.tsx`
-  - [x] Add window scroll listener to feed `--scroll-y` parallax custom property
-  - [x] Embed three floating background geometric shapes inside page content wrapper
-- [x] Implement Style & Keyframe Enhancements in `src/App.css`
-  - [x] Global reveal variables: duration 1.3s, ease-out-expo `cubic-bezier(0.22, 1, 0.36, 1)`, scale/translate offsets
-  - [x] Stagger delay rules: 150ms step intervals for grid cards, timeline components, team items, and faq rows
-  - [x] Hero section mouse parallax transforms and float-up text timings
-  - [x] Floating scroll indicator (animated mouse mousewheel) in Hero footer
-  - [x] Background floating decoration keyframe translations
-  - [x] Parallax offset translates using `--scroll-y` variable
-  - [x] Ripple light-shine hover sweeps on buttons
-  - [x] Soft glowing green shadows and luxurious transition eases on card elevations
-- [x] Verify layout responsiveness
-  - [x] Check prefers-reduced-motion safety
-  - [x] Ensure 60 FPS rendering using GPU-accelerated transforms
-- [x] Full-bleed layout connectivity & center alignment
-- [x] Treatments page category tab scroller optimization (removed scrollbars, resolved button hover clipping, centered layout track)
+- [x] Create InnerHero Component (`src/components/InnerHero.tsx`)
+- [x] Add CSS Styling (`src/App.css`)
+- [x] Integrate InnerHero in About Page (`src/pages/About.tsx`)
+- [x] Integrate InnerHero in PatientInfo Page (`src/pages/PatientInfo.tsx`)
+- [x] Integrate InnerHero in Treatments Page (`src/pages/Treatments.tsx`)
+- [x] Integrate InnerHero in TreatmentDetail Page (`src/pages/TreatmentDetail.tsx`)
+- [x] Integrate InnerHero in SmileGallery Page (`src/pages/SmileGallery.tsx`)
+- [x] Integrate InnerHero in Testimonials Page (`src/pages/Testimonials.tsx`)
+- [x] Integrate InnerHero in Enquiry Page (`src/pages/Enquiry.tsx`)
+- [x] Integrate InnerHero in Contact Page (`src/pages/Contact.tsx`)
+- [x] Verify TypeScript Compilation
+- [x] Verify visual presentation in browser

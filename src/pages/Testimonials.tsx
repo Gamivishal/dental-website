@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { InnerHero } from '../components/InnerHero';
+import waitingImg from '../assets/images/Waiting.jpeg';
 import dentalVeneersVideo from '../assets/Video/DentalVeneers.mp4';
 import aiVideo from '../assets/Video/AIVideo.mp4';
 
@@ -239,23 +241,14 @@ export const Testimonials: React.FC = () => {
 
   return (
     <div className="page testimonials-page fade-in">
-
       {/* 1. Testimonials Hero */}
-      <section className="testimonials-hero-premium">
-        <div className="hero-background-overlay" />
-        <div className="hero-premium-content">
-          <span className="premium-tag reveal">PATIENT SUCCESS STORIES</span>
-          <h1 className="reveal">Reviews & Testimonials</h1>
-          <p className="reveal">
-            Read honest reviews and stories from patient cases who chose Oceanview Dental Studio.
-          </p>
-          <div className="hero-scroll-indicator reveal">
-            <span className="mouse-icon">
-              <span className="wheel-dot"></span>
-            </span>
-          </div>
-        </div>
-      </section>
+      <InnerHero
+        pageTitle="Reviews & Testimonials"
+        badgeText="PATIENT SUCCESS STORIES"
+        subtitle="Read honest reviews and stories from patient cases who chose Oceanview Dental Studio."
+        currentPageName="Testimonials"
+        bgImage={waitingImg}
+      />
 
       {/* 2. Overall Patient Rating */}
       <section className="overall-rating-section-premium reveal">
@@ -653,7 +646,10 @@ export const Testimonials: React.FC = () => {
             <button
               type="button"
               className="cta-button primary-cta ripple-button"
-              onClick={() => window.location.hash = '#/enquiry'}
+              onClick={() => {
+                window.history.pushState({}, '', '/enquiry');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
             >
               Book an Appointment
             </button>

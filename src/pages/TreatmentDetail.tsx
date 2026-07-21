@@ -1,5 +1,7 @@
 import React from 'react';
 import type { TreatmentSub } from './Treatments';
+import { InnerHero } from '../components/InnerHero';
+import clinicImg2 from '../assets/images/Clinic 2.jpeg';
 
 interface TreatmentDetailProps {
   subcategory: TreatmentSub | null;
@@ -22,13 +24,13 @@ export const TreatmentDetail: React.FC<TreatmentDetailProps> = ({ subcategory, s
   return (
     <div className="page treatment-detail-page fade-in">
       {/* Detail Hero */}
-      <section className="detail-hero">
-        <div className="hero-overlay">
-          <span>DENTAL TREATMENT PROCEDURE</span>
-          <h1>{subcategory.name}</h1>
-          <p>{subcategory.desc}</p>
-        </div>
-      </section>
+      <InnerHero
+        pageTitle={subcategory.name}
+        badgeText="TREATMENT PROCEDURE"
+        subtitle={subcategory.desc}
+        currentPageName={subcategory.name}
+        bgImage={clinicImg2}
+      />
 
       {/* Main Content */}
       <section className="detail-content-section">

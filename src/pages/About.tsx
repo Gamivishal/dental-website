@@ -5,6 +5,7 @@ import clinicImg2 from '../assets/images/Clinic 2.jpeg';
 import entryImg from '../assets/images/Entry.jpeg';
 import waitingImg1 from '../assets/images/Waiting.jpeg';
 import waitingImg2 from '../assets/images/Waiting 2.jpeg';
+import { InnerHero } from '../components/InnerHero';
 
 export const About: React.FC = () => {
   // Cinematic Scroll reveal trigger (repeats on scroll, threshold 0.22)
@@ -64,13 +65,13 @@ export const About: React.FC = () => {
   return (
     <div className="page about-page fade-in">
       {/* About Hero Banner */}
-      <section className="about-hero">
-        <div className="hero-overlay">
-          <span>ABOUT OCEANVIEW</span>
-          <h1>Our Dedication to Dental Excellence</h1>
-          <p>Learn more about our philosophy, our chief surgeon, and our world-class sterilization protocols.</p>
-        </div>
-      </section>
+      <InnerHero
+        pageTitle="Our Dedication to Dental Excellence"
+        badgeText="ABOUT OCEANVIEW"
+        subtitle="Learn more about our philosophy, our chief surgeon, and our world-class sterilization protocols."
+        currentPageName="About Us"
+        bgImage={waitingImg1}
+      />
 
       {/* Chief Dentist Profile */}
       <section className="doctor-profile-section">
