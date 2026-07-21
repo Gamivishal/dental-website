@@ -426,11 +426,7 @@
 /* Home Page Hero Slider */
 .hero-slider-section {
   position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: 100%;
   height: calc(100vh - 84px);
   min-height: 550px;
   overflow: hidden;
@@ -3673,8 +3669,8 @@
 
 /* WhatsApp: Large green primary */
 .floating-whatsapp {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background: #25d366;
   color: #ffffff;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15), 0 0 16px rgba(37, 211, 102, 0.4);
@@ -3686,8 +3682,8 @@
 
 /* Call: Medium dark teal with gold icon */
 .floating-call {
-  width: 52px;
-  height: 52px;
+  width: 45px;
+  height: 45px;
   background: var(--accent);
   color: #d4af37;
   /* Gold phone icon */
@@ -3700,8 +3696,8 @@
 
 /* Back to Top: Small light gray */
 .floating-top {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   background: #ffffff;
   backdrop-filter: blur(10px);
   color: #4b5563;
@@ -8394,11 +8390,7 @@ html.font-large {
    ========================================== */
 .inner-page-hero-premium {
   position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: 100%;
   height: 420px;
   display: flex;
   flex-direction: column;
@@ -8906,15 +8898,7 @@ form p,
 /* --- GLOBAL MOBILE RESPONSIVENESS FIXES --- */
 @media (max-width: 768px) {
 
-  /* 1. Ensure the main page container has full width and proper inner padding */
-  .page {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-    box-sizing: border-box !important;
-  }
-
+  /* 1. Ensure proper inner padding for specific legacy layouts (removed .page override) */
   /* 2. Eliminate negative margins on sections causing left/right clipping */
   .home-section-alternate-light,
   .home-section-alternate-white,

@@ -55,6 +55,32 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Custom Scrollbar for Firefox */
+  scrollbar-color: #cda851 #0d3538;
+  scrollbar-width: thin;
+}
+
+/* Custom Scrollbar for Webkit (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track-piece {
+  background: #0d3538 !important;
+  background-color: #0d3538 !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #cda851;
+  border-radius: 999px;
+  border: 2px solid #0d3538;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #b59242;
 }
 
 body {
@@ -269,13 +295,25 @@ a {
   }
 }
 
-/* Page shell padding */
+/* Page shell padding - Re-architected for full-bleed backgrounds */
 .page {
-  width: 1200px;
-  max-width: 95%;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   padding: 60px 0 100px;
   box-sizing: border-box;
+}
+
+/* Ensure all direct sections span 100% but constrain their content to 1200px max-width */
+.page>section,
+.page>div:not(.floating-shape) {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-left: calc(max(16px, 50% - 600px)) !important;
+  padding-right: calc(max(16px, 50% - 600px)) !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 .section-header {
