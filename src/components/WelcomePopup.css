@@ -37,11 +37,34 @@
 }
 
 .welcome-popup-inner-scroll {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 0;
+  display: flex;
+  flex-direction: column;
   max-height: 90vh;
   overflow-y: auto;
+}
+
+@media (min-width: 1024px) {
+  .welcome-popup-inner-scroll {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    grid-template-rows: auto 1fr;
+    gap: 0;
+  }
+  
+  .welcome-popup-left-content {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .welcome-popup-actions-container {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  .welcome-popup-right {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
 }
 
 .welcome-popup-overlay.show .welcome-popup-container {
@@ -78,11 +101,15 @@
 }
 
 /* Left Content */
-.welcome-popup-left {
-  padding: 48px;
+.welcome-popup-left-content {
+  padding: 48px 48px 24px 48px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.welcome-popup-actions-container {
+  padding: 0 48px 48px 48px;
 }
 
 .welcome-popup-header {
@@ -357,22 +384,15 @@
 
 /* Responsive */
 @media (max-width: 1023px) {
-  .welcome-popup-inner-scroll {
-    grid-template-columns: 1fr;
-  }
-
   .welcome-popup-container {
     max-width: 90%;
   }
 
   .welcome-popup-right {
-    padding: 32px;
-    padding-top: 64px;
-    /* Space for absolute close button */
+    padding: 32px 32px 40px 32px;
     border-left: none;
+    border-top: 1px solid rgba(13, 92, 115, 0.05);
     border-bottom: 1px solid rgba(13, 92, 115, 0.05);
-    order: -1;
-    /* Image on top */
     position: static;
     height: auto;
     max-height: none;
@@ -385,8 +405,12 @@
     margin-bottom: 16px;
   }
 
-  .welcome-popup-left {
-    padding: 32px;
+  .welcome-popup-left-content {
+    padding: 64px 32px 16px 32px;
+  }
+  
+  .welcome-popup-actions-container {
+    padding: 24px 32px 32px 32px;
   }
 }
 
@@ -412,14 +436,16 @@
     margin: 0 auto 12px auto;
   }
 
-  .welcome-popup-left {
-    padding: 24px;
+  .welcome-popup-left-content {
+    padding: 64px 24px 16px 24px;
+  }
+
+  .welcome-popup-actions-container {
+    padding: 16px 24px 32px 24px;
   }
 
   .welcome-popup-right {
-    padding: 24px;
-    padding-top: 64px;
-    /* Maintain close button safety zone on mobile */
+    padding: 32px 24px;
   }
 
   .welcome-features {

@@ -80,7 +80,7 @@ export const WelcomePopup: React.FC<WelcomePopupProps> = ({ setCurrentPage }) =>
         </button>
 
         <div className="welcome-popup-inner-scroll">
-          <div className="welcome-popup-left">
+          <div className="welcome-popup-left-content">
             <div className="welcome-popup-header">
               <img src={logoImg} alt="Dr. Sheekha Shah Dental Studio Logo" />
               <div>
@@ -131,7 +131,18 @@ export const WelcomePopup: React.FC<WelcomePopupProps> = ({ setCurrentPage }) =>
                 <span>Lifetime Care</span>
               </div>
             </div>
+          </div>
 
+          <div className="welcome-popup-right">
+            <img src={ceoImg} alt="Dr. Sheekha Shah" className="welcome-doctor-img" />
+            <h3>Dr. Sheekha Shah</h3>
+            <h4>Dental Surgeon</h4>
+            <div className="welcome-quote">
+              Your comfort and confidence are my top priorities. Welcome to a new standard of dental care.
+            </div>
+          </div>
+
+          <div className="welcome-popup-actions-container">
             <div className="welcome-actions">
               <div className="welcome-actions-row">
                 <button
@@ -163,15 +174,6 @@ export const WelcomePopup: React.FC<WelcomePopupProps> = ({ setCurrentPage }) =>
               <div className="welcome-limited">
                 📅 Limited Appointments Available This Week
               </div>
-            </div>
-          </div>
-
-          <div className="welcome-popup-right">
-            <img src={ceoImg} alt="Dr. Sheekha Shah" className="welcome-doctor-img" />
-            <h3>Dr. Sheekha Shah</h3>
-            <h4>Dental Surgeon</h4>
-            <div className="welcome-quote">
-              Your comfort and confidence are my top priorities. Welcome to a new standard of dental care.
             </div>
           </div>
         </div>
