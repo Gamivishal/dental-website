@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface FloatingButtonsProps {
   setCurrentPage: (page: string) => void;
@@ -6,14 +6,34 @@ interface FloatingButtonsProps {
 
 export const FloatingButtons: React.FC<FloatingButtonsProps> = ({ setCurrentPage }) => {
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > 500) {
         setShowBackToTop(true);
       } else {
         setShowBackToTop(false);
       }
+
+      // Auto hide while scrolling down, reappear scrolling up
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+
+      // Never overlap footer
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const bodyHeight = document.documentElement.scrollHeight;
+      if (bodyHeight - scrollPosition < 350) {
+        setIsVisible(false);
+      }
+
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -28,7 +48,7 @@ export const FloatingButtons: React.FC<FloatingButtonsProps> = ({ setCurrentPage
   return (
     <>
       {/* Floating Action Group */}
-      <div className="floating-action-group fade-in">
+      <div className={`floating-action-group fade-in ${isVisible ? 'visible' : 'hidden'}`}>
         {/* Back to Top Button (Small, Light Gray) */}
         {showBackToTop && (
           <button

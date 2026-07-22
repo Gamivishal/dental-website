@@ -303,19 +303,23 @@ export const Home: React.FC<HomeProps> = ({ setCurrentPage, setSelectedCategory 
 
         {/* 4. Large Trust & Achievement Bar (Statistics Section) */}
         <section className="home-stats-bar-premium reveal">
-          <div className="home-stat-item-premium">
+          <div className="home-stat-item-premium fade-in" style={{ animationDelay: '0.1s' }}>
+            <div className="stat-icon">⭐</div>
             <h3><AnimatedCounter value={5.0} decimals={1} suffix=" ★" /></h3>
             <p>Google Rating (1000+ Reviews)</p>
           </div>
-          <div className="home-stat-item-premium">
+          <div className="home-stat-item-premium fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="stat-icon">🏅</div>
             <h3>ISO</h3>
             <p>Certified 9001:2015 Standards</p>
           </div>
-          <div className="home-stat-item-premium">
+          <div className="home-stat-item-premium fade-in" style={{ animationDelay: '0.3s' }}>
+            <div className="stat-icon">🦷</div>
             <h3><AnimatedCounter value={15} suffix="+ Yrs" /></h3>
             <p>Clinical Practice</p>
           </div>
-          <div className="home-stat-item-premium">
+          <div className="home-stat-item-premium fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className="stat-icon">🛡️</div>
             <h3><AnimatedCounter value={100} suffix="%" /></h3>
             <p>Warranty Validated Cases</p>
           </div>
@@ -469,7 +473,7 @@ export const Home: React.FC<HomeProps> = ({ setCurrentPage, setSelectedCategory 
         </section>
 
         {/* 9. Technology & Comfort Details (Split visual grid) */}
-        <section className="home-section-alternate-light reveal">
+        <section className="home-section-alternate-teal reveal">
           <div className="tech-comfort-grid">
             <div className="tech-comfort-copy reveal-left">
               <div className="section-header align-left">

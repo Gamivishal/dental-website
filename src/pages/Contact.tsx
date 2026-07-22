@@ -184,51 +184,54 @@ export const Contact: React.FC = () => {
 
                 <form onSubmit={handleBooking} className="booking-form">
                   <div className="form-group">
-                    <label htmlFor="book-name">Patient Full Name</label>
                     <input
                       type="text"
                       id="book-name"
                       value={bookingName}
                       onChange={(e) => setBookingName(e.target.value)}
-                      placeholder="Dr. / Mr. / Ms. Name"
+                      placeholder=" "
                       required
                     />
+                    <label htmlFor="book-name">Patient Full Name</label>
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="book-phone">Phone Number</label>
                     <input
                       type="tel"
                       id="book-phone"
                       value={bookingPhone}
                       onChange={(e) => setBookingPhone(e.target.value)}
-                      placeholder="+1 (555) 000-0000"
+                      placeholder=" "
                       required
                     />
+                    <label htmlFor="book-phone">Phone Number</label>
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="book-date">Preferred Date</label>
                     <input
                       type="date"
                       id="book-date"
                       value={bookingDate}
                       onChange={(e) => setBookingDate(e.target.value)}
+                      placeholder=" "
                       required
                     />
+                    <label htmlFor="book-date">Preferred Date</label>
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="book-time">Preferred Time Slot</label>
                     <select
                       id="book-time"
                       value={bookingTime}
                       onChange={(e) => setBookingTime(e.target.value)}
+                      required
                     >
+                      <option value="" disabled hidden></option>
                       <option value="morning">Morning (9:00 AM - 12:00 PM)</option>
                       <option value="afternoon">Afternoon (12:00 PM - 4:00 PM)</option>
                       <option value="evening">Evening (4:00 PM - 8:00 PM)</option>
                     </select>
+                    <label htmlFor="book-time">Preferred Time Slot</label>
                   </div>
 
                   <button type="submit" className="cta-button primary-cta w-full">

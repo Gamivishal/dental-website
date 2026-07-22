@@ -1,48 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Premium Sage Green Brand Color Palette */
-  --bg: #F8FBFA;
+  /* Premium Luxury Dental Clinic Palette */
+  --bg: #FAF9F7;
   --bg-card: #FFFFFF;
   --bg-card-hover: #FFFFFF;
-  --bg-section: #EDF5F4;
-  --border: #D8E5E3;
-  --border-hover: #4E6F6E;
-  --text: #6D7A79;
-  --text-h: #2E3B3A;
-  --accent: #4E6F6E;
-  --accent-hover: #3F5D5C;
-  --accent-secondary: #6F908D;
-  --accent-light: #A7C8C3;
+  --bg-section: #FAF9F7; /* Soft Ivory */
+  --border: #E5E7EB;
+  --border-hover: #CDA851; /* Gold */
+  --text: #4B5563;
+  --text-h: #0E2F44;
+  --accent: #0D5C73; /* Primary */
+  --accent-hover: #1B6F8A; /* Secondary */
+  --accent-secondary: #1B6F8A;
+  --accent-light: #E8F4F8; /* Very Light Teal */
   --success: #6BAA75;
   --white: #FFFFFF;
-  --accent-gold: #cda851;
-  --accent-gold-hover: #b59242;
+  --accent-gold: #CDA851;
+  --accent-gold-hover: #B59242;
+  --wood-accent: #8B5E3C;
 
   /* Header Specific Tokens */
-  --header-bg: #FFFFFF;
-  --header-text: #2F3D3C;
-  --header-accent: #496A69;
-  --header-accent-hover: #365554;
-  --header-border: #E8F0EF;
+  --header-bg: rgba(255, 255, 255, 0.9);
+  --header-text: #0E2F44;
+  --header-accent: #0D5C73;
+  --header-accent-hover: #1B6F8A;
+  --header-border: #E5E7EB;
 
   /* Footer Specific Tokens */
-  --footer-bg: #0d3538;
-  --footer-text: #DCE7E5;
+  --footer-bg: #0E2F44;
+  --footer-text: #E5E7EB;
   --footer-text-h: #FFFFFF;
   --footer-link: #FFFFFF;
-  --footer-link-hover: #BFD5D1;
-  --footer-social-bg: #5B7C7B;
-  --footer-social-hover-bg: #BFD5D1;
-  --footer-social-hover-text: #365554;
-  --footer-copyright-bg: #0d3538;
+  --footer-link-hover: #CDA851;
+  --footer-social-bg: #1B6F8A;
+  --footer-social-hover-bg: #CDA851;
+  --footer-social-hover-text: #FFFFFF;
+  --footer-copyright-bg: #0E2F44;
 
-  --accent-rgb: 78, 111, 110;
-  --accent-secondary-rgb: 111, 144, 141;
-  --accent-light-rgb: 167, 200, 195;
+  --accent-rgb: 13, 92, 115;
+  --accent-secondary-rgb: 27, 111, 138;
+  --accent-light-rgb: 232, 244, 248;
 
-  --shadow: 0 10px 30px rgba(78, 111, 110, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 20px 40px rgba(78, 111, 110, 0.08), 0 1px 10px rgba(0, 0, 0, 0.04);
+  --shadow: 0 10px 30px rgba(13, 92, 115, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-hover: 0 20px 40px rgba(13, 92, 115, 0.08), 0 1px 10px rgba(0, 0, 0, 0.04);
 
   --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --heading: 'Cormorant Garamond', Georgia, serif;
@@ -112,29 +113,21 @@ h4 {
 }
 
 h1 {
-  font-size: 56px;
-  line-height: 110%;
-  font-weight: 800;
-
-  @media (max-width: 768px) {
-    font-size: 38px;
-  }
+  font-size: clamp(2.5rem, 5vw + 1rem, 4rem);
+  line-height: 1.1;
+  font-weight: 700;
 }
 
 h2 {
-  font-size: 38px;
-  line-height: 120%;
-  font-weight: 800;
-
-  @media (max-width: 768px) {
-    font-size: 28px;
-  }
+  font-size: clamp(2rem, 4vw + 0.5rem, 3rem);
+  line-height: 1.2;
+  font-weight: 700;
 }
 
 h3 {
-  font-size: 24px;
-  line-height: 130%;
-  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
+  line-height: 1.3;
+  font-weight: 600;
 }
 
 p {
@@ -151,12 +144,12 @@ a {
   }
 }
 
-/* Glassmorphism/Premium Generic Card */
+/* Premium Glass Card */
 .glass-card {
   position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 32px;
   box-shadow: var(--shadow);
   transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -164,50 +157,10 @@ a {
   overflow: hidden;
   z-index: 1;
 
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0;
-    background: var(--accent);
-    z-index: -1;
-    transition: height 350ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  h2,
-  h3,
-  h4,
-  p,
-  span,
-  strong,
-  div,
-  button {
-    transition: color 300ms ease, border-color 300ms ease;
-  }
-
   &:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent);
+    transform: translateY(-8px);
+    border-color: var(--accent-gold);
     box-shadow: var(--shadow-hover);
-
-    &::before {
-      height: 100%;
-    }
-
-    h2,
-    h3,
-    h4,
-    strong {
-      color: #ffffff !important;
-    }
-
-    p,
-    span,
-    div {
-      color: rgba(255, 255, 255, 0.9) !important;
-    }
   }
 }
 
@@ -217,61 +170,54 @@ a {
   font-size: 15px;
   font-weight: 600;
   padding: 14px 32px;
-  border-radius: 50px;
-  border: none;
+  border-radius: 16px;
+  border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   letter-spacing: 0.2px;
 
-  &.primary {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  &.primary, &.primary-cta {
+    background: var(--accent);
     color: #ffffff;
-    box-shadow: rgba(78, 111, 110, 0.15) 0 8px 16px -4px;
+    box-shadow: 0 4px 14px rgba(13, 92, 115, 0.15);
 
     &:hover {
       background: var(--accent-hover);
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: rgba(63, 93, 92, 0.4) 0 12px 24px -5px;
+      border-color: var(--accent-gold);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(205, 168, 81, 0.25);
     }
   }
 
   &.secondary {
     background: #ffffff;
     color: var(--accent);
-    border: 2px solid var(--accent);
+    border: 1px solid var(--accent);
 
     &:hover {
       background: var(--accent);
       color: #ffffff;
-      transform: translateY(-2px);
+      transform: translateY(-4px) scale(1.02);
+      border-color: var(--accent-gold);
+      box-shadow: 0 8px 24px rgba(205, 168, 81, 0.25);
     }
   }
 
   &.outline {
     background: transparent;
     color: var(--accent);
-    border: 2px solid var(--accent);
+    border: 1px solid var(--accent);
 
     &:hover {
       background: var(--accent);
       color: #ffffff;
-      transform: translateY(-2px);
-    }
-  }
-
-  &.primary-cta {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-    color: #ffffff;
-    box-shadow: rgba(78, 111, 110, 0.15) 0 8px 16px -4px;
-
-    &:hover {
-      background: var(--accent-hover);
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: rgba(63, 93, 92, 0.4) 0 12px 24px -5px;
+      transform: translateY(-4px) scale(1.02);
+      border-color: var(--accent-gold);
+      box-shadow: 0 8px 24px rgba(205, 168, 81, 0.25);
     }
   }
 
