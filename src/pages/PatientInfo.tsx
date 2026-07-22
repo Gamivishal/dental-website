@@ -83,50 +83,59 @@ export const PatientInfo: React.FC<PatientInfoProps> = ({ setCurrentPage }) => {
         <div className="section-header reveal">
           <h2>First Visit Process</h2>
         </div>
-        <div className="vertical-timeline">
-          <div className="timeline-step-item reveal-left">
-            <div className="step-badge">1</div>
-            <div className="step-icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="16" y1="13" x2="8" y2="13" />
-                <line x1="16" y1="17" x2="8" y2="17" />
-                <polyline points="10 9 9 9 8 9" />
-              </svg>
-            </div>
-            <div className="step-content">
+        <div className="premium-timeline-container">
+          {/* Central Line */}
+          <div className="timeline-center-line"></div>
+
+          {/* Item 1 */}
+          <div className="timeline-item left reveal-left">
+            <div className="timeline-node"></div>
+            <div className="timeline-card-glass">
+              <div className="premium-badge">01</div>
+              <div className="timeline-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+              </div>
               <h3>Reception check-in and health history review</h3>
               <p>Meet our care team, complete your diagnostic checklist, and hand over medical records cleanly.</p>
             </div>
           </div>
 
-          <div className="timeline-step-item reveal-right">
-            <div className="step-badge">2</div>
-            <div className="step-icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="22" y1="12" x2="18" y2="12" />
-                <line x1="6" y1="12" x2="2" y2="12" />
-                <line x1="12" y1="6" x2="12" y2="2" />
-                <line x1="12" y1="22" x2="12" y2="18" />
-              </svg>
-            </div>
-            <div className="step-content">
+          {/* Item 2 */}
+          <div className="timeline-item right reveal-right">
+            <div className="timeline-node"></div>
+            <div className="timeline-card-glass">
+              <div className="premium-badge">02</div>
+              <div className="timeline-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="22" y1="12" x2="18" y2="12" />
+                  <line x1="6" y1="12" x2="2" y2="12" />
+                  <line x1="12" y1="6" x2="12" y2="2" />
+                  <line x1="12" y1="22" x2="12" y2="18" />
+                </svg>
+              </div>
               <h3>Clinical examination with digital scans if needed</h3>
               <p>Relax in our high-end treatment suite as we review your visual structure and bone alignment details.</p>
             </div>
           </div>
 
-          <div className="timeline-step-item reveal-left">
-            <div className="step-badge">3</div>
-            <div className="step-icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="8" r="7" />
-                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
-              </svg>
-            </div>
-            <div className="step-content">
+          {/* Item 3 */}
+          <div className="timeline-item left reveal-left">
+            <div className="timeline-node"></div>
+            <div className="timeline-card-glass">
+              <div className="premium-badge">03</div>
+              <div className="timeline-icon-wrap">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="8" r="7" />
+                  <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                </svg>
+              </div>
               <h3>Treatment discussion and transparent cost estimate</h3>
               <p>Explore your customized treatment map and receive structured breakdowns of costs and timelines.</p>
             </div>

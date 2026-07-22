@@ -5,15 +5,20 @@
   --bg: #FAF9F7;
   --bg-card: #FFFFFF;
   --bg-card-hover: #FFFFFF;
-  --bg-section: #FAF9F7; /* Soft Ivory */
+  --bg-section: #FAF9F7;
+  /* Soft Ivory */
   --border: #E5E7EB;
-  --border-hover: #CDA851; /* Gold */
+  --border-hover: #CDA851;
+  /* Gold */
   --text: #4B5563;
   --text-h: #0E2F44;
-  --accent: #0D5C73; /* Primary */
-  --accent-hover: #1B6F8A; /* Secondary */
+  --accent: #0D5C73;
+  /* Primary */
+  --accent-hover: #1B6F8A;
+  /* Secondary */
   --accent-secondary: #1B6F8A;
-  --accent-light: #E8F4F8; /* Very Light Teal */
+  --accent-light: #E8F4F8;
+  /* Very Light Teal */
   --success: #6BAA75;
   --white: #FFFFFF;
   --accent-gold: #CDA851;
@@ -28,15 +33,15 @@
   --header-border: #E5E7EB;
 
   /* Footer Specific Tokens */
-  --footer-bg: #0E2F44;
-  --footer-text: #E5E7EB;
+  --footer-bg: #0D3538;
+  --footer-text: #F8F6F2;
   --footer-text-h: #FFFFFF;
   --footer-link: #FFFFFF;
   --footer-link-hover: #CDA851;
-  --footer-social-bg: #1B6F8A;
+  --footer-social-bg: rgba(255, 255, 255, 0.08);
   --footer-social-hover-bg: #CDA851;
   --footer-social-hover-text: #FFFFFF;
-  --footer-copyright-bg: #0E2F44;
+  --footer-copyright-bg: #0A282A;
 
   --accent-rgb: 13, 92, 115;
   --accent-secondary-rgb: 27, 111, 138;
@@ -180,7 +185,8 @@ a {
   gap: 8px;
   letter-spacing: 0.2px;
 
-  &.primary, &.primary-cta {
+  &.primary,
+  &.primary-cta {
     background: var(--accent);
     color: #ffffff;
     box-shadow: 0 4px 14px rgba(13, 92, 115, 0.15);

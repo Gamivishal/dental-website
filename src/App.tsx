@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { FloatingButtons } from './components/FloatingButtons';
+import { WelcomePopup } from './components/WelcomePopup';
 
 // Page Imports
 import { Home } from './pages/Home';
@@ -151,6 +152,9 @@ function App() {
 
       {/* Floating CTAs Widget */}
       <FloatingButtons setCurrentPage={setCurrentPage} />
+
+      {/* Welcome Popup */}
+      <WelcomePopup setCurrentPage={setCurrentPage} />
 
       {/* Cookie Consent Glass Banner */}
       {!cookieConsent && (

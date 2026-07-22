@@ -19,19 +19,14 @@ export const FloatingButtons: React.FC<FloatingButtonsProps> = ({ setCurrentPage
         setShowBackToTop(false);
       }
 
-      // Auto hide while scrolling down, reappear scrolling up
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-
+      let visible = true;
       // Never overlap footer
       const scrollPosition = window.innerHeight + window.scrollY;
       const bodyHeight = document.documentElement.scrollHeight;
       if (bodyHeight - scrollPosition < 350) {
-        setIsVisible(false);
+        visible = false;
       }
+      setIsVisible(visible);
 
       lastScrollY.current = currentScrollY;
     };
