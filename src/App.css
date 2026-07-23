@@ -3978,6 +3978,10 @@
   }
 }
 
+.modal-mobile-header {
+  display: contents;
+}
+
 .modal-close-btn-premium {
   position: absolute;
   top: 20px;
@@ -4402,6 +4406,25 @@
     height: auto;
     max-height: 90vh;
     overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .modal-mobile-header {
+    display: flex;
+    justify-content: flex-end;
+    position: sticky;
+    top: 0;
+    z-index: 1120;
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(13, 53, 56, 0.05);
+  }
+  
+  .modal-close-btn-premium {
+    position: static;
   }
 
   .modal-two-columns {

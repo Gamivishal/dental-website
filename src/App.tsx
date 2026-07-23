@@ -52,6 +52,18 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent background scrolling when Quick Overview modal is open
+  useEffect(() => {
+    if (selectedSubcategory && currentPage !== 'treatment-detail') {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedSubcategory, currentPage]);
+
   // Sync state with URL path updates (e.g. browser navigation, page reload)
   useEffect(() => {
     const handlePopState = () => {
@@ -180,10 +192,12 @@ function App() {
           <div className="treatment-modal-overlay" onClick={() => setSelectedSubcategory(null)}>
             <div className="treatment-modal-card-premium" onClick={(e) => e.stopPropagation()}>
 
-              {/* Sticky Close Button */}
-              <button className="modal-close-btn-premium" onClick={() => setSelectedSubcategory(null)} aria-label="Close modal">
-                ✕
-              </button>
+              {/* Sticky Close Button Header for Mobile */}
+              <div className="modal-mobile-header">
+                <button className="modal-close-btn-premium" onClick={() => setSelectedSubcategory(null)} aria-label="Close modal">
+                  ✕
+                </button>
+              </div>
 
               <div className="modal-two-columns">
 
