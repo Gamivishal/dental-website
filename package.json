@@ -16,21 +16,21 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "^1.49.0",
+    "@playwright/test": "^1.61.1",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
+    "axe-core": "^4.10.2",
+    "dotenv": "^16.4.7",
     "eslint": "^10.6.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.3",
     "globals": "^17.7.0",
+    "playwright": "^1.49.0",
+    "ts-node": "^10.9.2",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.62.0",
-    "vite": "^8.1.1",
-    "axe-core": "^4.10.2",
-    "dotenv": "^16.4.7",
-    "playwright": "^1.49.0",
-    "ts-node": "^10.9.2"
+    "vite": "^8.1.1"
   }
 }

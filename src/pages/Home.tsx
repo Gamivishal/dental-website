@@ -140,7 +140,7 @@ export const Home: React.FC<HomeProps> = ({ setCurrentPage, setSelectedCategory 
           entry.target.classList.remove('in-view');
         }
       });
-    }, { threshold: 0.22 });
+    }, { threshold: 0.1 });
 
     els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
@@ -386,10 +386,10 @@ export const Home: React.FC<HomeProps> = ({ setCurrentPage, setSelectedCategory 
                 We maintain the highest global standards of sterilization, pain-free therapies, and specialized care from digital scanning to post-treatment checks.
               </p>
               <ul className="benefits-list">
-                <li>🔬 <strong>Dental Microscopy:</strong> 20x magnification for exact root canal accuracy.</li>
-                <li>🛡️ <strong>Grade-B Autoclaves:</strong> Strict hospital sterilization workflows.</li>
-                <li>🛋️ <strong>Anxiety-Free Environment:</strong> Relaxing background visuals and calm setups.</li>
-                <li>💳 <strong>Flexible Finance:</strong> 0% interest EMI payment structures.</li>
+                <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '8px', color: 'var(--accent)'}}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> <strong>Dental Microscopy:</strong> 20x magnification for exact root canal accuracy.</li>
+                <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '8px', color: 'var(--accent)'}}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <strong>Grade-B Autoclaves:</strong> Strict hospital sterilization workflows.</li>
+                <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '8px', color: 'var(--accent)'}}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> <strong>Anxiety-Free Environment:</strong> Relaxing background visuals and calm setups.</li>
+                <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '8px', color: 'var(--accent)'}}><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> <strong>Flexible Finance:</strong> 0% interest EMI payment structures.</li>
               </ul>
             </div>
 
@@ -543,21 +543,33 @@ export const Home: React.FC<HomeProps> = ({ setCurrentPage, setSelectedCategory 
 
           <div className="testimonial-preview-grid">
             <article className="testimonial-preview-card reveal-left" style={{ border: '1px solid var(--border)', borderRadius: '24px', background: '#F7FAF9', padding: '36px' }}>
-              <div className="testimonial-stars" style={{ color: 'var(--accent)', marginBottom: '12px' }}>★★★★★</div>
+              <div className="testimonial-stars" style={{ color: 'var(--accent-gold)', marginBottom: '12px', display: 'flex', gap: '4px' }}>
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ))}
+              </div>
               <p style={{ fontStyle: 'italic', fontSize: '15px', lineHeight: '1.6' }}>“The process was completely painless, and the staff made sure I felt comfortable the whole time.”</p>
               <strong style={{ display: 'block', marginTop: '16px', color: 'var(--text-h)' }}>Sarah M.</strong>
               <span style={{ fontSize: '13px', color: 'var(--accent-hover)' }}>Smile Makeover</span>
             </article>
 
             <article className="testimonial-preview-card reveal" style={{ border: '1px solid var(--border)', borderRadius: '24px', background: '#F7FAF9', padding: '36px' }}>
-              <div className="testimonial-stars" style={{ color: 'var(--accent)', marginBottom: '12px' }}>★★★★★</div>
+              <div className="testimonial-stars" style={{ color: 'var(--accent-gold)', marginBottom: '12px', display: 'flex', gap: '4px' }}>
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ))}
+              </div>
               <p style={{ fontStyle: 'italic', fontSize: '15px', lineHeight: '1.6' }}>“Done in under an hour and no pain at all the next day. Truly state-of-the-art.”</p>
               <strong style={{ display: 'block', marginTop: '16px', color: 'var(--text-h)' }}>David K.</strong>
               <span style={{ fontSize: '13px', color: 'var(--accent-hover)' }}>Single-Sitting Root Canal</span>
             </article>
 
             <article className="testimonial-preview-card reveal-right" style={{ border: '1px solid var(--border)', borderRadius: '24px', background: '#F7FAF9', padding: '36px' }}>
-              <div className="testimonial-stars" style={{ color: 'var(--accent)', marginBottom: '12px' }}>★★★★★</div>
+              <div className="testimonial-stars" style={{ color: 'var(--accent-gold)', marginBottom: '12px', display: 'flex', gap: '4px' }}>
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ))}
+              </div>
               <p style={{ fontStyle: 'italic', fontSize: '15px', lineHeight: '1.6' }}>“The scans were digital and my teeth are perfectly aligned now. Excellent service!”</p>
               <strong style={{ display: 'block', marginTop: '16px', color: 'var(--text-h)' }}>Elena R.</strong>
               <span style={{ fontSize: '13px', color: 'var(--accent-hover)' }}>Clear Aligners</span>
