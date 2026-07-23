@@ -216,38 +216,48 @@ export const Home: React.FC<HomeProps> = ({ setCurrentPage, setSelectedCategory 
         <section className="home-section-alternate-light reveal">
           <div className="split-info-visuals-grid">
             <div className="split-left-info reveal-left">
-              <span className="section-tag">PATIENT PROTECTION</span>
-              <h2>Lifetime Dental Warranty Program</h2>
-              <p>Selected restorative and implant cases are fully backed by our long-term warranty program. We establish clear clinical protocols to ensure confidence before treatment begins.</p>
+              <span className="section-tag premium-warranty-tag">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                PATIENT PROTECTION
+              </span>
+              <h2 className="premium-warranty-heading">Lifetime Dental Warranty Program</h2>
+              <p className="premium-warranty-desc">Selected restorative and implant cases are fully backed by our long-term warranty program. We establish clear clinical protocols to ensure confidence before treatment begins.</p>
 
-              <ul className="details-checklist">
+              <ul className="details-checklist premium-warranty-list">
                 <li>
-                  <span className="check-bullet">✓</span>
+                  <span className="check-bullet premium-shield"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
                   <div>
                     <strong>Coverage That Stays With You:</strong>
                     <p>Designed to support qualifying treatments with clear diagnostic follow-ups.</p>
                   </div>
                 </li>
                 <li>
-                  <span className="check-bullet">✓</span>
+                  <span className="check-bullet premium-shield"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
                   <div>
                     <strong>Built on Clinical Standards:</strong>
                     <p>Warranty-backed plans are paired with strict sterilization and digital planning.</p>
                   </div>
                 </li>
                 <li>
-                  <span className="check-bullet">✓</span>
+                  <span className="check-bullet premium-shield"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
                   <div>
                     <strong>Simple Eligibility Reviews:</strong>
                     <p>We explain details and options beforehand so you remain fully informed.</p>
                   </div>
                 </li>
               </ul>
+              
+              <div className="premium-warranty-action">
+                <button className="cta-button outline premium-warranty-cta" onClick={() => handleNav('enquiry')}>
+                  Learn More About Our Warranty
+                </button>
+              </div>
             </div>
 
             <div className="split-right-visuals reveal-right">
-              <div className="visuals-frame">
-                <img src={clinicImg2} alt="Modern clinical treatment room" />
+              <div className="visuals-frame premium-warranty-visuals-frame">
+                <div className="premium-warranty-bg-shape"></div>
+                <img src={clinicImg2} alt="Modern clinical treatment room" className="premium-warranty-img" />
               </div>
             </div>
           </div>
