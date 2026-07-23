@@ -120,7 +120,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, set
             <span className="header-tooltip">Chat on WhatsApp</span>
           </a>
           <button className="header-book-appointment-btn" onClick={() => handleNav('enquiry')}>
-            <svg className="book-btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E2C275" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+            <svg className="book-btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#C89B3C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="16" y1="2" x2="16" y2="6"></line>
               <line x1="8" y1="2" x2="8" y2="6"></line>

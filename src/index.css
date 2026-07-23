@@ -2,59 +2,62 @@
 
 :root {
   /* Premium Luxury Dental Clinic Palette */
-  --bg: #FAF9F7;
+  --bg: #F7F8F7;
   --bg-card: #FFFFFF;
   --bg-card-hover: #FFFFFF;
-  --bg-section: #FAF9F7;
-  /* Soft Ivory */
+  --bg-section: #EEF3F2;
+  
   --border: #E5E7EB;
-  --border-hover: #CDA851;
-  /* Gold */
-  --text: #374151;
-  --text-h: #0E2F44;
-  --accent: #0D5C73;
-  /* Primary */
-  --accent-hover: #2185A6;
-  /* Secondary */
-  --accent-secondary: #1B6F8A;
-  --accent-light: #E8F4F8;
-  /* Very Light Teal */
+  --border-hover: #C89B3C;
+  
+  --text: #5E6666;
+  --text-h: #1B2C2D;
+  
+  --accent: #45696A;
+  --accent-hover: #355657;
+  --accent-secondary: #355657;
+  --accent-light: #EEF3F2;
+  
   --success: #6BAA75;
   --white: #FFFFFF;
-  --accent-gold: #CDA851;
-  --accent-gold-hover: #B59242;
+  --accent-gold: #C89B3C;
+  --accent-gold-hover: #B58A2B;
   --wood-accent: #8B5E3C;
 
   /* Header Specific Tokens */
-  --header-bg: rgba(255, 255, 255, 0.9);
-  --header-text: #0E2F44;
-  --header-accent: #0D5C73;
-  --header-accent-hover: #1B6F8A;
-  --header-border: #E5E7EB;
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --header-text: #1B2C2D;
+  --header-accent: #45696A;
+  --header-accent-hover: #C89B3C;
+  --header-border: rgba(69, 105, 106, 0.1);
 
   /* Footer Specific Tokens */
-  --footer-bg: #0D3538;
-  --footer-text: #F8F6F2;
+  --footer-bg: #24393A;
+  --footer-text: #EEF3F2;
   --footer-text-h: #FFFFFF;
-  --footer-link: #FFFFFF;
-  --footer-link-hover: #CDA851;
-  --footer-social-bg: rgba(255, 255, 255, 0.08);
-  --footer-social-hover-bg: #CDA851;
+  --footer-link: #EEF3F2;
+  --footer-link-hover: #C89B3C;
+  --footer-social-bg: rgba(255, 255, 255, 0.1);
+  --footer-social-hover-bg: #C89B3C;
   --footer-social-hover-text: #FFFFFF;
-  --footer-copyright-bg: #0A282A;
+  --footer-copyright-bg: #1B2C2D;
 
-  --accent-rgb: 13, 92, 115;
-  --accent-secondary-rgb: 27, 111, 138;
-  --accent-light-rgb: 232, 244, 248;
+  /* RGB variants for opacity calculations */
+  --accent-rgb: 69, 105, 106;
+  --accent-secondary-rgb: 53, 86, 87;
+  --accent-light-rgb: 238, 243, 242;
+  --accent-gold-rgb: 200, 155, 60;
 
-  --shadow: 0 10px 30px rgba(13, 92, 115, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 20px 40px rgba(13, 92, 115, 0.08), 0 1px 10px rgba(0, 0, 0, 0.04);
+  /* Refined Premium Shadows */
+  --shadow: 0 12px 36px rgba(27, 44, 45, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+  --shadow-hover: 0 24px 48px rgba(27, 44, 45, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
 
+  /* Typography */
   --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --heading: 'Cormorant Garamond', Georgia, serif;
   --mono: ui-monospace, monospace;
 
-  font: 17px/160% var(--sans);
+  font: 16px/165% var(--sans);
   letter-spacing: normal;
   color-scheme: light;
   color: var(--text);
@@ -65,7 +68,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Custom Scrollbar for Firefox */
-  scrollbar-color: var(--accent-gold) #0d3538;
+  scrollbar-color: var(--accent-gold) var(--footer-bg);
   scrollbar-width: thin;
 }
 
@@ -164,7 +167,7 @@ a {
   position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 32px;
   box-shadow: var(--shadow);
   transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -199,13 +202,13 @@ a {
   &.primary-cta {
     background: var(--accent);
     color: #ffffff;
-    box-shadow: 0 8px 30px rgba(13, 92, 115, 0.1);
+    box-shadow: 0 8px 30px rgba(var(--accent-rgb), 0.15);
 
     &:hover {
       background: var(--accent-hover);
       border-color: var(--accent-gold);
       transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 8px 24px rgba(205, 168, 81, 0.25);
+      box-shadow: 0 8px 24px rgba(var(--accent-gold-rgb), 0.25);
     }
   }
 
@@ -213,13 +216,14 @@ a {
     background: #ffffff;
     color: var(--accent);
     border: 1px solid var(--accent);
+    box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.05);
 
     &:hover {
       background: var(--accent);
       color: #ffffff;
       transform: translateY(-4px) scale(1.02);
       border-color: var(--accent-gold);
-      box-shadow: 0 8px 24px rgba(205, 168, 81, 0.25);
+      box-shadow: 0 8px 24px rgba(var(--accent-gold-rgb), 0.25);
     }
   }
 
@@ -233,7 +237,7 @@ a {
       color: #ffffff;
       transform: translateY(-4px) scale(1.02);
       border-color: var(--accent-gold);
-      box-shadow: 0 8px 24px rgba(205, 168, 81, 0.25);
+      box-shadow: 0 8px 24px rgba(var(--accent-gold-rgb), 0.25);
     }
   }
 

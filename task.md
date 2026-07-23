@@ -1,14 +1,17 @@
-# Task Checklist: Premium Inner Page Hero Redesign
-
-- [x] Create InnerHero Component (`src/components/InnerHero.tsx`)
-- [x] Add CSS Styling (`src/App.css`)
-- [x] Integrate InnerHero in About Page (`src/pages/About.tsx`)
-- [x] Integrate InnerHero in PatientInfo Page (`src/pages/PatientInfo.tsx`)
-- [x] Integrate InnerHero in Treatments Page (`src/pages/Treatments.tsx`)
-- [x] Integrate InnerHero in TreatmentDetail Page (`src/pages/TreatmentDetail.tsx`)
-- [x] Integrate InnerHero in SmileGallery Page (`src/pages/SmileGallery.tsx`)
-- [x] Integrate InnerHero in Testimonials Page (`src/pages/Testimonials.tsx`)
-- [x] Integrate InnerHero in Enquiry Page (`src/pages/Enquiry.tsx`)
-- [x] Integrate InnerHero in Contact Page (`src/pages/Contact.tsx`)
-- [x] Verify TypeScript Compilation
-- [x] Verify visual presentation in browser
+- `[x]` Update Global Styles (`src/index.css`)
+  - [x] Update CSS variables to the new Color System
+  - [x] Refine typography hierarchy
+  - [x] Update global `.glass-card` and button styles
+  - [x] Remove overly dark/generic colors
+- `[x]` Update App Styles (`src/App.css`)
+  - [x] Refine layout containers and spacing rules
+  - [x] Update hero sections and floating shapes
+  - [x] Improve mobile and tablet responsiveness
+- `[x]` Core Components
+  - [x] Update `Header.tsx` & Header CSS
+  - [x] Update `Footer.tsx` & Footer CSS
+  - [x] Update `WelcomePopup.tsx` & `WelcomePopup.css`
+- `[x]` Pages
+  - [x] Updated to inherit from the new global color system
+- `[x]` Verification
+  - [x] Visual review against rules
